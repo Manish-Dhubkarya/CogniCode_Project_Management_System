@@ -33,6 +33,7 @@ const NavigationTabs: React.FC = () => {
             </div>
           </div>
         );
+        
       })}
     </div>
   );
