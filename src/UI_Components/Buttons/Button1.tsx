@@ -1,25 +1,37 @@
+import React from 'react';
 
 interface Button1Props {
-        width: string;
-        height: string;
-        value: string;
-        gradientType?: string;
-    }
-const Button1: React.FC<Button1Props> = ({ width, height, value, gradientType }) => {
-    const gradient =
+  value: string;
+  gradientType?: string;
+}
+
+const Button1: React.FC<Button1Props> = ({ value, gradientType }) => {
+  const gradient =
     gradientType === 'gradient1'
       ? 'conic-gradient(from 90deg at 50% 50%, #011B40 0deg, #0348A6 360deg)'
       : 'conic-gradient(from 90deg at 50% 50%, #474747 0deg, #9A9A9A 360deg)';
+
   return (
-   <div
-      className={`${width} ${height} text-white text-[12px] px-6 py-1 cursor-pointer border border-black shadow-[2px_3px_4px_0px_black]`}
+    <div
+      className={`
+        text-white 
+        font-semibold 
+        text-[12px] sm:text-[13px] md:text-[14px] lg:text-[14px]
+        px-4 sm:px-6 md:px-8 
+        py-1 sm:py-1.5 md:py-2 
+        cursor-pointer 
+        border border-black 
+        shadow-[2px_3px_4px_0px_black]
+        inline-block
+        text-center
+      `}
       style={{
         background: gradient,
       }}
     >
-        {value}
+      {value}
     </div>
-  )
-}
+  );
+};
 
-export default Button1
+export default Button1;

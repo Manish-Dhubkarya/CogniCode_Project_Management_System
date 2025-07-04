@@ -1,15 +1,13 @@
 import React from 'react';
 
 interface Button3Props {
-  width: string;
-  height: string;
   value: string;
 }
 
-const Button3: React.FC<Button3Props> = ({ width, height, value }) => {
+const Button3: React.FC<Button3Props> = ({ value }) => {
   return (
     <div
-      className={`${width} ${height} mix-blend-hard-light rounded-[7px] flex items-center justify-center text-white text-sm cursor-pointer`}
+      className={`sm:px-10 px-7 py-1 rounded-[7px] flex items-center justify-center text-white sm:text-[12px] text-[10px] font-medium cursor-pointer`}
       style={{
           background: 'linear-gradient(90deg, #012557 0%, #0251BD 100%)',
       }}
