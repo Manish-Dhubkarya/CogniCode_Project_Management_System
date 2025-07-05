@@ -15,7 +15,7 @@ const Filter: React.FC = () => {
   return (
     <div className="flex flex-col items-start mx-auto">
       <div className="text-[12px] font-bold mb-2">Filter</div>
-      <div className="font-bold text-[12px] mb-4 space-x-[2px]"><span>Apply</span><span>/</span><span>Clear filters</span></div>
+      <div className="font-bold text-[12px] mb-4 space-x-[2px]"><span className="hover:scale-110">Apply</span><span>/</span><span className="hover:scale-110 duration-150 transition transform">Clear filters</span></div>
 
       <div className=" border-black  border-[1.5px] bg-white rounded-xl  py-5.5 pl-4 pr-8 xs:space-y-3 space-y-4 md:space-y-5 lg:space-y-6 xl:space-y-7">
         {filters.map((filter) => (

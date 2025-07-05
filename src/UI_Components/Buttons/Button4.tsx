@@ -3,13 +3,15 @@ import React from 'react';
 interface Button3Props {
   value1: string;
   value2: string;
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
 }
 
-const Button4: React.FC<Button3Props> = ({ value1, value2 }) => {
+const Button4: React.FC<Button3Props> = ({ value1, value2, onClick }) => {
   return (
     <div
+    onClick={onClick}
       className={`
-        sm:px-9 px-7 py-1.5 
+        sm:px-7 px-5 py-2 
         
         
         font-medium

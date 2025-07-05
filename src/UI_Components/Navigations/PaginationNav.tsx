@@ -18,7 +18,7 @@ const PaginationNav: React.FC<PaginationNavProps> = ({ total }) => {
   };
 
   return (
-    <div className="flex items-center select-none justify-center space-x-4 bg-[#e6e6e6] border border-black px-4 py-1.5 rounded-full w-fit">
+    <div className="flex items-center select-none justify-center space-x-3 bg-[#e6e6e6] border border-black px-5 py-1.5 rounded-full w-fit">
         <IoMdArrowDropleft onClick={handlePrev} className='cursor-pointer' size={20} />
       <span className="text-sm font-medium text-black">
         {current} / {total}

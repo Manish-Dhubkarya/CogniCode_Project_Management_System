@@ -6,9 +6,9 @@ const Navigation1: React.FC = () => {
   const [activeTab, setActiveTab] = useState("Requests");
 
   return (
-    <div className="w-full overflow-x-auto no-scrollbar">
+    <div className="w-full py-2 px-3 overflow-x-auto no-scrollbar">
       <div
-        className="inline-flex py-2 pl-2 whitespace-nowrap"
+        className="inline-flex  pl-2"
         style={{ transform: "rotate(0.2deg)" }}
       >
         {tabs.map((tab, index) => {
@@ -31,7 +31,7 @@ const Navigation1: React.FC = () => {
                 h-[30px] sm:h-[34px] md:h-[36px] lg:h-[40px]
                 ml-[-10px]
                 transition-all duration-300 ease-in-out
-                ${index === 0 ? "skew-x-[-14deg] z-5" : "transform skew-x-[-14deg]"}
+                ${index === 0 ? "skew-x-[-16deg] z-5" : "transform skew-x-[-16deg]"}
                 ${isActive
                   ? "bg-white font-medium scale-[1.15] translate-y-[2.5px] shadow-md"
                   : "bg-[#F8FAFC] font-normal scale-100 translate-y-0 shadow-none"
@@ -39,7 +39,7 @@ const Navigation1: React.FC = () => {
               `}
               style={{ zIndex }}
             >
-              <div className="transform -tracking-[0.03rem] skew-x-[14deg]">
+              <div className="transform -tracking-[0.03rem] skew-x-[16deg]">
                 {tab}
               </div>
             </div>
