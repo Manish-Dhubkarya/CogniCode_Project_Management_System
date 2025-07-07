@@ -1,29 +1,40 @@
-import React, { useState } from 'react';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import React from 'react';
 import { IoMdArrowDropleft, IoMdArrowDropright } from 'react-icons/io';
 
 interface PaginationNavProps {
   total: number;
+  current: number;
+  onPageChange: (page: number) => void;
 }
 
-const PaginationNav: React.FC<PaginationNavProps> = ({ total }) => {
-  const [current, setCurrent] = useState(1);
-
+const PaginationNav: React.FC<PaginationNavProps> = ({ total, current, onPageChange }) => {
   const handlePrev = () => {
-    if (current > 1) setCurrent(current - 1);
+    if (current > 1) {
+      onPageChange(current - 1);
+    }
   };
 
   const handleNext = () => {
-    if (current < total) setCurrent(current + 1);
+    if (current < total) {
+      onPageChange(current + 1);
+    }
   };
 
   return (
     <div className="flex items-center select-none justify-center space-x-3 bg-[#e6e6e6] border border-black px-5 py-1.5 rounded-full w-fit">
-        <IoMdArrowDropleft onClick={handlePrev} className='cursor-pointer' size={20} />
+      <IoMdArrowDropleft
+        onClick={handlePrev}
+        className={`cursor-pointer ${current === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
+        size={20}
+      />
       <span className="text-sm font-medium text-black">
         {current} / {total}
       </span>
-        <IoMdArrowDropright onClick={handleNext} className='cursor-pointer' size={20} />
+      <IoMdArrowDropright
+        onClick={handleNext}
+        className={`cursor-pointer ${current === total ? 'opacity-50 cursor-not-allowed' : ''}`}
+        size={20}
+      />
     </div>
   );
 };

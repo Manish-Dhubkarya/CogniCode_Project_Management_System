@@ -1,15 +1,93 @@
 import './App.css'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import LoginPage from './Screens/LoginPage';
-import Profile from './Screens/Profile';
+import UserProfile from "./assets/CredientialAssets/UserProfile.jpg";
+import EmployeeProfile from './Screens/EmployeeProfile';
+import ClientProfile from './Screens/ClientProfile';
+
 
 function App() {
+  interface PerformanceProps{
+    label:string;
+    value:string;
+  }
+
+interface EmployeeProfileProps {
+  EmployeeName: string;
+  Profile: string;
+  Designation: string;
+  TL: string;
+  ProjectStartDate: string;
+  ProjectEndDate: string;
+  ProjectOnGoing: number;
+  ProjectCompleted: number;
+  Performance: PerformanceProps[];
+}
+
+// Define the profileProps object
+const employeeProfile: EmployeeProfileProps = {
+  EmployeeName:"Himanshu Verma",
+  Profile:UserProfile,
+  Designation:"CEO",
+  TL:"NONE",
+  ProjectStartDate:"1 June",
+  ProjectEndDate:"1 Sep",
+  ProjectOnGoing:10,
+  ProjectCompleted:20,
+Performance: [
+  { label: "Accuracy", value: "90%" },
+  { label: "On Time Execution", value: "70%" },
+  { label: "Skills", value: "80%" },
+  { label: "Efficiency", value: "75%" },
+]
+};
+
+  interface ProjectDetailsProps {
+  Workstream:string;
+  Description:string;
+  SubmissionDate:string;
+  status:string;
+}
+interface ClientProfileProps{
+  ClientName:string;
+  Profile:string;
+  Designation:string;
+  ProjectStartDate:string;
+  ProjectEndDate:string;
+  ProjectOnGoing:number;
+  ProjectCompleted:number;
+  ProjectDetails: ProjectDetailsProps[];
+}
+const clientProfile:ClientProfileProps={
+    ClientName:"Himanshu Verma",
+  Profile:UserProfile,
+  Designation:"CEO CogniCode",
+  ProjectStartDate:"2024",
+  ProjectEndDate:"2025",
+  ProjectOnGoing:10,
+  ProjectCompleted:200,
+  ProjectDetails: [
+     { Workstream: "UI Design", Description: "User interface design for HR portal.", SubmissionDate: "10 Jan", status: "Completed" },
+  { Workstream: "Backend API", Description: "RESTful API development for user module.", SubmissionDate: "18 Jan", status: "Completed" },
+  { Workstream: "Authentication", Description: "Integrate secure login and JWT tokens.", SubmissionDate: "25 Jan", status: "Completed" },
+  { Workstream: "Dashboard", Description: "Create admin dashboard with charts.", SubmissionDate: "2 Feb", status: "In Progress" },
+  { Workstream: "Bug Fixing", Description: "Resolve reported UI and logic issues.", SubmissionDate: "5 Feb", status: "Completed" },
+  { Workstream: "Performance", Description: "Optimize loading time and API response.", SubmissionDate: "8 Feb", status: "Pending" },
+  { Workstream: "Testing", Description: "Unit and integration testing using Jest.", SubmissionDate: "12 Feb", status: "Completed" },
+  { Workstream: "Deployment", Description: "Deploy application to staging server.", SubmissionDate: "15 Feb", status: "Completed" },
+  { Workstream: "Plagiarism Removal", Description: "Ensure all code is original and compliant.", SubmissionDate: "17 Feb", status: "Completed" },
+  { Workstream: "Code Review", Description: "Peer code review for all modules.", SubmissionDate: "19 Feb", status: "In Progress" },
+  { Workstream: "Documentation", Description: "Create developer and user documentation.", SubmissionDate: "22 Feb", status: "Pending" },
+  { Workstream: "Client Feedback", Description: "Incorporate final feedback from client.", SubmissionDate: "25 Feb", status: "Scheduled" }
+  ]
+}
   return(
     <div className='font-librefranklin'>
     <Router>
       <Routes>
         <Route path='/login' element={<LoginPage/>}></Route>
-        <Route path='/profile' element={<Profile/>}></Route>
+        <Route path='/employeeprofile' element={<EmployeeProfile {...employeeProfile} />}></Route>
+        <Route path='/clientprofile' element={<ClientProfile {...clientProfile} />}></Route>
       </Routes>
     </Router>
 </div>

@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
-import { FaRegUserCircle, FaUser, FaUserCircle } from "react-icons/fa";
-interface ProfileWithDesignationProps {
+import { FaUser } from "react-icons/fa";
 
-}
 const ProfileWithDesignation = () => {
     const [width, setWidth] = useState(window.innerWidth);
 
@@ -13,12 +11,13 @@ const ProfileWithDesignation = () => {
   }, []);
 
 
-  const isXS = width > 480 && width <= 639;
-  const isSM = width > 640 && width <= 767;
-  const isMD = width > 768 && width <= 1023;
-  const isLG = width > 1024 && width <= 1279;
-  const isXL = width > 1280 && width <= 1536;
-  const is2XL = width > 1536;
+  //  const isXXS =width<=480;
+    const isXS = width > 480 && width <= 640;
+    const isSM = width > 640 && width <= 768;
+    const isMD = width > 768 && width <= 1024;
+    const isLG = width > 1024 && width <= 1280;
+    const isXL = width > 1280 && width <= 1536;
+    const is2XL = width > 1536;
   return (
     <div className="flex  items-start ">
         <div className="flex  flex-col items-center justify-center">

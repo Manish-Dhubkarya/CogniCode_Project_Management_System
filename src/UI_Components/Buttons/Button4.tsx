@@ -1,8 +1,8 @@
 import React from 'react';
 
 interface Button3Props {
-  value1: string;
-  value2: string;
+  value1: any;
+  value2: any;
   onClick?: React.MouseEventHandler<HTMLDivElement>;
 }
 
