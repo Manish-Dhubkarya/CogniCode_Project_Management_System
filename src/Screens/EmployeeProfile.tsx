@@ -35,12 +35,12 @@ const EmployeeProfile:React.FC<EmployeeProfileProps> = ({EmployeeName, Designati
     const isXL = width > 1280 && width <= 1536;
     const is2XL = width > 1536;
   return (
-    <div className={`flex items-center ${isXXS || isXS ?"": is2XL?"h-screen py-[30vh]": isXL?"py-[20vh]":"py-[10vh]"} justify-center `}>
+    <div className={`flex items-center ${isXXS || isXS ?"": is2XL?"h-screen py-[30vh]": isXL?"py-[20vh] ":"py-[10vh]"} justify-center`}>
       <MainNavigation isMenuHide={false} />
 
-    <div className={`w-full  ${isXXS || isXS || isSM || isMD || isLG?"":"flex items-end justify-center"} ${isXXS || isXS ?"pt-15 pb-10":""}   ${isXL ?"px-[5vw] gap-15": is2XL?"gap-35": isLG?"px-[2vw]":""}  `}>
+    <div className={`w-full  ${isXXS || isXS || isSM || isMD || isLG?"":"flex items-end justify-center"} ${isXXS || isXS ?"pt-15 pb-10":""}   ${isXL ?" items-center justify-center  gap-15": is2XL?"gap-35": isLG?"px-[2vw]":""}  `}>
       {/* Left Side: Profile Info */}
-      <div className={`flex ${isXXS?"flex-col" :isXS ?"flex-col": isSM || isMD || isLG?"flex-row justify-center gap-x-[5vh]":"flex-col justify-center"}  items-center w-full ${isXXS || isXS || isSM || isMD || isLG?"":"max-w-xs"}   `}>
+      <div className={`flex ${isXXS?"flex-col" :isXS ?"flex-col": isSM || isMD || isLG?"flex-row justify-center gap-x-[5vh]":"flex-col  justify-center"}  items-center w-full ${isXXS || isXS || isSM || isMD || isLG?"":"max-w-xs"}   `}>
         {/* Profile Image */}
         <div className="flex flex-col items-center">
          <div className={`${isXXS  || isXS?"w-[200px] h-[200px]":isSM?"w-[200px] h-[200px]":isMD?"w-[200px] h-[200px]": isLG || isXL?"w-[215px] h-[215px]":"w-[255px] h-[255px]"}  rounded-full overflow-hidden border-6  border-gray-300 shadow-md`}>
@@ -75,7 +75,7 @@ const EmployeeProfile:React.FC<EmployeeProfileProps> = ({EmployeeName, Designati
       </div>
 
       {/* Right Side: Performance Record */}
-      <div className={`flex flex-col w-full ${isXXS || isXS || isSM || isMD || isLG ? "items-center" : "items-start"}`}>
+      <div className={`flex  flex-col  ${isXXS || isXS || isSM || isMD || isLG ? "items-center w-full" : "items-start w-fit"}`}>
   <div className={`${isXXS?"text-[18px]": isXS || isSM?"text-[18px]":isMD?"text-[20px]":isLG?"text-[24px]": isXL?"text-[28px]":"text-[35px]"}  text-black font-medium ${isXXS || isXS || isSM || isMD || isLG ? "text-start mt-10 mb-4" : "mb-6"} -tracking-[0.02rem]`}>
     Performance Record 2024-2025
   </div>

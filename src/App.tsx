@@ -4,6 +4,8 @@ import LoginPage from './Screens/LoginPage';
 import UserProfile from "./assets/CredientialAssets/UserProfile.jpg";
 import EmployeeProfile from './Screens/EmployeeProfile';
 import ClientProfile from './Screens/ClientProfile';
+import ProgressTracking from './UI_Components/Progresses/ProgressTracking';
+import ClientProjectInfo from './Screens/ClientProjectInfo';
 
 
 function App() {
@@ -88,6 +90,7 @@ const clientProfile:ClientProfileProps={
         <Route path='/login' element={<LoginPage/>}></Route>
         <Route path='/employeeprofile' element={<EmployeeProfile {...employeeProfile} />}></Route>
         <Route path='/clientprofile' element={<ClientProfile {...clientProfile} />}></Route>
+        <Route path='/clientprojectinfo' element={<ClientProjectInfo />}></Route>
       </Routes>
     </Router>
 </div>

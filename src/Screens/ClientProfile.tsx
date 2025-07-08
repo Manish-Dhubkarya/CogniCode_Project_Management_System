@@ -42,14 +42,31 @@ const ClientProfile: React.FC<ClientProfileProps> = ({
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  useEffect(() => {
-    const scrollToTop = () => {
-      setTimeout(() => {
-        window.scrollTo({ top: 0, behavior: "instant" });
+ useEffect(() => {
+  // Disable browser scroll restoration
+  if ("scrollRestoration" in window.history) {
+    window.history.scrollRestoration = "manual";
+  }
+
+  // Scroll to top with a slight delay
+  const scrollToTop = () => {
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: "instant" });
+      document.getElementById("client-profile-root")?.scrollIntoView({
+        behavior: "instant",
+        block: "start",
       });
-    };
-    scrollToTop();
-  }, []);
+    }, 0);
+  };
+
+  // Run on mount and after load
+  scrollToTop();
+  window.addEventListener("load", scrollToTop);
+
+  return () => {
+    window.removeEventListener("load", scrollToTop);
+  };
+}, []);
 
   const isXXS = width <= 480;
   const isXS = width > 480 && width <= 640;
@@ -68,22 +85,22 @@ const ClientProfile: React.FC<ClientProfileProps> = ({
   return (
     <div
       className={`flex flex-col w-full ${
-        isXXS || isXS ? "" : is2XL ? "h-screen justify-center" : isXL ? " py-[10vh]" :  "py-[10vh]"
+        isXXS || isXS ? "" : isXL || is2XL ? " py-[10vh]" :  "py-[10vh]"
       }`}
     >
       <div className={`flex items-center justify-center`}>
         <MainNavigation isMenuHide={false} />
 
         <div
-          className={`w-full  ${
-            isXXS || isXS || isSM || isMD || isLG ? "" : "flex items-end justify-center"
+          className={`w-full ${
+            isXXS || isXS || isSM || isMD || isLG ? "" : "flex  items-end justify-center"
           } ${isXXS || isXS ? "pt-15 pb-10" : ""} ${
-            isXL ? "px-[4vw] gap-15" : is2XL ? "gap-35" : isLG || isMD || isSM || isXS || isXXS ? "px-[2vw]" : ""
+            isXL ? "px-[8vw] gap-15" : is2XL ? "gap-35 px-[8vw]" : isLG || isMD || isSM || isXS || isXXS ? "px-[2vw]" : ""
           }`}
         >
           {/* Left Side: Profile Info */}
           <div
-            className={`flex mb-7 ${
+            className={`flex  ${
               isXXS
                 ? "flex-col"
                 : isXS
@@ -91,12 +108,12 @@ const ClientProfile: React.FC<ClientProfileProps> = ({
                 : isSM || isMD || isLG
                 ? "flex-row justify-center gap-x-[5vh]"
                 : "flex-col justify-center"
-            } items-center w-full ${isXXS || isXS || isSM || isMD || isLG ? "" : "max-w-xs"}`}
+            } items-center w-full ${isXXS || isXS || isSM || isMD || isLG ? "mb-7" : "max-w-xs mb-7"}`}
           >
             {/* Profile Image */}
             <div className="flex flex-col items-center">
               <div
-                className={`${
+                className={` ${
                   isXXS || isXS
                     ? "w-[200px] h-[200px]"
                     : isSM
@@ -116,7 +133,7 @@ const ClientProfile: React.FC<ClientProfileProps> = ({
               </div>
 
               {/* Name and Info */}
-              <div className="text-center">
+              <div className="text-center ">
                 <div className={`${is2XL ? "text-[40px] mt-2" : isXXS || isXS || isSM?"text-[27px]": "text-[36px]"} font-normal`}>
                   {ClientName}
                 </div>
@@ -159,32 +176,36 @@ const ClientProfile: React.FC<ClientProfileProps> = ({
               </div>
             </div>
           </div>
-
+{(isXXS || isXS || isSM || isMD || isLG) &&
+<div className={`text-black font-medium  ${isXXS
+                  ? "text-[18px] pt-3 mb-3"
+                  : isXS || isSM
+                  ? "text-[20px] pt-3 mb-4"
+                  : isMD
+                  ? "text-[22px] pt-4 mb-5"
+                  : isLG
+                  ? "text-[24px] mb-6 pt-4":""}`}>Project Record 2024-2025</div>}
           {/* Right Side: Performance Record */}
           <div className="w-full overflow-x-auto">
+            
           <div
-            className={`flex  min-w-[600px] overflow-x-auto flex-col w-full ${isXXS || isXS || isSM || isMD || isLG ? "items-center" : "items-center"}`}
+            className={`flex  min-w-[650px] overflow-x-auto flex-col w-full ${isXXS || isXS || isSM || isMD || isLG ? "items-center" : "items-center"}`}
           >
+            { (isXL || is2XL) &&
             <div
-              className={`${
-                isXXS
-                  ? "text-[18px]"
-                  : isXS || isSM
-                  ? "text-[18px]"
-                  : isMD
-                  ? "text-[20px]"
-                  : isLG
-                  ? "text-[24px]"
-                  : isXL
-                  ? "text-[28px]"
-                  : "text-[35px]"
-              } text-black font-medium ${
-                isXXS || isXS || isSM || isMD || isLG ? "text-start mt-10 mb-4" : "mb-6"
+              className={` w-full ${
+                 isXL
+                  ? "text-[28px] mb-7"
+                  : "text-[35px] mb-8"
+              } text-black font-medium  "mb-6"
               } -tracking-[0.02rem]`}
             >
               Project Record 2024-2025
-            </div>
-            {currentItems.map((item, index) => (
+            </div>}
+            {currentItems.map((item, index) => {
+               
+
+    return (
               <div
                 className={`flex  justify-start items-start ${
                   index === currentItems.length - 1 ? "mt-3" : "my-3"
@@ -209,7 +230,8 @@ const ClientProfile: React.FC<ClientProfileProps> = ({
                   </div>
                 </div>
               </div>
-            ))}
+  );
+  })}
           </div>
           </div>
         </div>
