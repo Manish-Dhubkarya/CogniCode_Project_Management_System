@@ -2,7 +2,7 @@ import MainNavigation from "../UI_Components/Navigations/MainNavigation"
 import UserLogo from "../assets/CredientialAssets/UserLogo.png"
 const LoginPage = () => {
   return (
-    <div className="flex flex-col bg-red-700 items-center h-screen justify-center">
+    <div className="flex flex-col items-center h-screen justify-center">
       <MainNavigation isMenuHide={true}/>
       <div></div>
       <img src={UserLogo}/>

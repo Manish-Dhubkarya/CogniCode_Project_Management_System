@@ -111,7 +111,7 @@ const ClientProfile: React.FC<ClientProfileProps> = ({
             } items-center w-full ${isXXS || isXS || isSM || isMD || isLG ? "mb-7" : "max-w-xs mb-7"}`}
           >
             {/* Profile Image */}
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center ">
               <div
                 className={` ${
                   isXXS || isXS
