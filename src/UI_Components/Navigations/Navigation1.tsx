@@ -1,25 +1,27 @@
-import React, { useState } from "react";
+import React from "react";
 
-const tabs = ["Requests", "Active", "On-Going", "Completed", "Employees"];
+interface TabsProps {
+  tabs: string[];
+  activeTab: string;
+  setActiveTab: (tab: string) => void;
+}
 
-const Navigation1: React.FC = () => {
-  const [activeTab, setActiveTab] = useState("Requests");
-
+const Navigation1: React.FC<TabsProps> = ({ tabs, activeTab, setActiveTab }) => {
   return (
-    <div className="w-full py-2 px-3 overflow-x-auto no-scrollbar">
+    <div className="w-full py-2 px-4 overflow-x-auto no-scrollbar">
       <div
-        className="inline-flex  pl-2"
+        className="inline-flex pl-2"
         style={{ transform: "rotate(0.2deg)" }}
       >
         {tabs.map((tab, index) => {
           const isActive = activeTab === tab;
           let zIndex = tabs.length - index;
-          if (isActive) 
-            
-            {zIndex = tabs.length - index - 0.5;
-              if(index === 0) {
-                zIndex = tabs.length - index + 0.5;
-}}
+          if (isActive) {
+            zIndex = tabs.length - index - 0.5;
+            if (index === 0) {
+              zIndex = tabs.length - index + 0.5;
+            }
+          }
           return (
             <div
               key={tab}

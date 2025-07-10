@@ -6,6 +6,7 @@ import EmployeeProfile from "./Screens/EmployeeProfile";
 import ClientProfile from "./Screens/ClientProfile";
 import ClientProjectInfo from "./Screens/ClientProjectInfo";
 import EmployeeLanding from "./Screens/EmployeeLanding";
+import EmployeeProjectInfo from "./Screens/EmployeeProjectInfo";
 
 function App() {
   interface PerformanceProps {
@@ -169,6 +170,76 @@ function App() {
       {message:"Sure, It will be updated in your profile."}
     ]
   };
+  // Employee Landing
+
+  interface EmployeeProjectDetailsProps {
+  Designation: string;
+  Description: string;
+  SubmissionDate: string;
+}
+
+interface EmployeeLandingProps {
+  ProjectDetails:EmployeeProjectDetailsProps[]
+}
+
+interface EmployeeProjectDetailsProps {
+    Designation: string;
+    Description: string;
+    SubmissionDate: string;
+    status: string; // Added status field
+  }
+
+  interface EmployeeLandingProps {
+    ProjectDetails: EmployeeProjectDetailsProps[];
+  }
+
+  const employeeLanding: EmployeeLandingProps = {
+    ProjectDetails: [
+      {
+        Designation: "Full Stack Developer",
+        Description: "Website design for government project.",
+        SubmissionDate: "27 May 25",
+        status: "Active",
+      },
+      {
+        Designation: "Frontend Developer",
+        Description: "Developed responsive UI for healthcare portal.",
+        SubmissionDate: "10 Apr 25",
+        status: "Accepted",
+      },
+      {
+        Designation: "Backend Developer",
+        Description: "Created secure APIs for financial transaction system.",
+        SubmissionDate: "05 Mar 25",
+        status: "Requested",
+      },
+      {
+        Designation: "Mobile App Developer",
+        Description: "Built a cross-platform mobile app for e-learning.",
+        SubmissionDate: "18 Feb 25",
+        status: "Performance",
+      },
+      {
+        Designation: "DevOps Engineer",
+        Description: "Automated CI/CD pipelines and deployed to AWS.",
+        SubmissionDate: "12 Jan 25",
+        status: "Active",
+      },
+      {
+        Designation: "UI/UX Designer",
+        Description: "Redesigned dashboard interface for logistics software.",
+        SubmissionDate: "30 Nov 24",
+        status: "Accepted",
+      },
+      {
+        Designation: "UI/UX Designer",
+        Description: "Redesigned dashboard interface for logistics software.",
+        SubmissionDate: "30 Nov 24",
+        status: "Requested",
+      },
+    ],
+  };
+
   return (
     <div className="font-librefranklin">
       <Router>
@@ -188,7 +259,11 @@ function App() {
           ></Route>
           <Route
             path="/employeelanding"
-            element={<EmployeeLanding />}
+            element={<EmployeeLanding {...employeeLanding} />}
+          ></Route>
+          <Route
+            path="/employeeprojectinfo"
+            element={<EmployeeProjectInfo />}
           ></Route>
         </Routes>
       </Router>
