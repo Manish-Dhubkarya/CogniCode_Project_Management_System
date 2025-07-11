@@ -214,18 +214,18 @@ const ClientProfile: React.FC<ClientProfileProps> = ({
               >
                 <div className="flex flex-col-reverse items-start justify-start w-full">
                   <div>
-                    <Button1 gradientType="gradient1" text={`${is2XL?"text-[15px]":"text-[12px]"} `} value="UI Designer" />
+                    <Button1 gradientType={item.status==="Submitted"?"":"gradient1"} text={`${is2XL?"text-[15px]":"text-[12px]"} `} value="UI Designer" />
                   </div>
                   <div className="border-t-2 border-[#000000] w-full"></div>
                 </div>
-                <div className="flex mt-3 w-full  pl-[2vw] justify-between items-center">
-                  <div className={`text-[#FF0000] w-[33.33%] text-start flex font-normal ${is2XL?"text-[15px]":"text-[12px]"} -tracking-[0.02rem]`}>
+                <div className={`flex mt-3 w-full  pl-[2vw] justify-between items-center ${item.status==="Submitted"?"text-[#474747]":"text-[#FF0000]"} `}>
+                  <div className={`w-[33.33%] text-start flex font-normal ${is2XL?"text-[15px]":"text-[12px]"} -tracking-[0.02rem]`}>
                     {item.Description}
                   </div>
-                  <div className={`text-[#FF0000] font-normal flex justify-center w-[33.33%] ${is2XL?"text-[15px]":"text-[12px]"} -tracking-[0.02rem]`}>
+                  <div className={` font-normal flex justify-center w-[33.33%] ${is2XL?"text-[15px]":"text-[12px]"} -tracking-[0.02rem]`}>
                     Submission Date: {item.SubmissionDate}
                   </div>
-                  <div className={`text-[#FF0000] w-[33.33%] font-normal text-[12px] -tracking-[0.02rem]`}>
+                  <div className={` w-[33.33%] font-normal text-[12px] -tracking-[0.02rem]`}>
                     {item.status}
                   </div>
                 </div>
