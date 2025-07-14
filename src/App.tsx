@@ -8,6 +8,7 @@ import ClientProjectInfo from "./Screens/ClientProjectInfo";
 import EmployeeLanding from "./Screens/EmployeeLanding";
 import EmployeeProjectInfo from "./Screens/EmployeeProjectInfo";
 import TeamLeaderLanding from "./Screens/TeamLeader/TeamLeaderLanding";
+import AllEmployeeList from "./Screens/AllEmployeeList";
 
 function App() {
   interface PerformanceProps {
@@ -74,73 +75,73 @@ function App() {
         Workstream: "UI Design",
         Description: "User interface design for HR portal.",
         SubmissionDate: "10 Jan",
-        status: "Completed",
+        status: "SUBMISSION PENDING",
       },
       {
         Workstream: "Backend API",
         Description: "RESTful API development for user module.",
         SubmissionDate: "18 Jan",
-        status: "Completed",
+        status: "SUBMITTED",
       },
       {
         Workstream: "Authentication",
         Description: "Integrate secure login and JWT tokens.",
         SubmissionDate: "25 Jan",
-        status: "Submitted",
+        status: "SUBMISSION PENDING",
       },
       {
         Workstream: "Dashboard",
         Description: "Create admin dashboard with charts.",
         SubmissionDate: "2 Feb",
-        status: "In Progress",
+        status: "SUBMISSION PENDING",
       },
       {
         Workstream: "Bug Fixing",
         Description: "Resolve reported UI and logic issues.",
         SubmissionDate: "5 Feb",
-        status: "Completed",
+        status: "SUBMITTED",
       },
       {
         Workstream: "Performance",
         Description: "Optimize loading time and API response.",
         SubmissionDate: "8 Feb",
-        status: "Submittted",
+        status: "SUBMISSION PENDING",
       },
       {
         Workstream: "Testing",
         Description: "Unit and integration testing using Jest.",
         SubmissionDate: "12 Feb",
-        status: "Completed",
+        status: "SUBMITTED",
       },
       {
         Workstream: "Deployment",
         Description: "Deploy application to staging server.",
         SubmissionDate: "15 Feb",
-        status: "Completed",
+        status: "SUBMISSION PENDING",
       },
       {
         Workstream: "Plagiarism Removal",
         Description: "Ensure all code is original and compliant.",
         SubmissionDate: "17 Feb",
-        status: "Completed",
+        status: "SUBMITTED",
       },
       {
         Workstream: "Code Review",
         Description: "Peer code review for all modules.",
         SubmissionDate: "19 Feb",
-        status: "Submitted",
+        status: "SUBMISSION PENDING",
       },
       {
         Workstream: "Documentation",
         Description: "Create developer and user documentation.",
         SubmissionDate: "22 Feb",
-        status: "Pending",
+        status: "SUBMISSION PENDING",
       },
       {
         Workstream: "Client Feedback",
         Description: "Incorporate final feedback from client.",
         SubmissionDate: "25 Feb",
-        status: "Scheduled",
+        status: "SUBMITTED",
       },
     ],
   };
@@ -189,6 +190,7 @@ function App() {
   }
 
   interface EmployeeProjectDetailsProps {
+    Category:string
     Designation: string;
     Description: string;
     SubmissionDate: string;
@@ -203,6 +205,7 @@ function App() {
   const employeeLanding: EmployeeLandingProps = {
     ProjectDetails: [
       {
+        Category:"Data Science Projects",
         Designation: "Full Stack Developer",
         Description: "Website design for government project.",
         SubmissionDate: "27 May 25",
@@ -210,6 +213,7 @@ function App() {
         statusRemark:"",
       },
       {
+        Category:"Data Science Projects",
         Designation: "Frontend Developer",
         Description: "Developed responsive UI for healthcare portal.",
         SubmissionDate: "10 Apr 25",
@@ -217,6 +221,7 @@ function App() {
         statusRemark:"SUBMISSION PENDING",
       },
       {
+        Category:"Data Science Projects",
         Designation: "Backend Developer",
         Description: "Created secure APIs for financial transaction system.",
         SubmissionDate: "05 Mar 25",
@@ -224,20 +229,7 @@ function App() {
         statusRemark:"ACCEPTED"
       },
       {
-        Designation: "Mobile App Developer",
-        Description: "Built a cross-platform mobile app for e-learning.",
-        SubmissionDate: "18 Feb 25",
-        status: "Performance",
-        statusRemark:"Good"
-      },
-      {
-        Designation: "Mobile App Developer",
-        Description: "Built a cross-platform mobile app for e-learning.",
-        SubmissionDate: "18 Feb 25",
-        status: "Performance",
-        statusRemark:"Excellent"
-      },
-      {
+        Category:"UI Design Projects",
         Designation: "DevOps Engineer",
         Description: "Automated CI/CD pipelines and deployed to AWS.",
         SubmissionDate: "12 Jan 25",
@@ -245,6 +237,7 @@ function App() {
         statusRemark:""
       },
       {
+        Category:"UI Design Projects",
         Designation: "UI/UX Designer",
         Description: "Redesigned dashboard interface for logistics software.",
         SubmissionDate: "30 Nov 24",
@@ -252,6 +245,103 @@ function App() {
         statusRemark:"Submitted"
       },
       {
+        Category:"UI Design Projects",
+        Designation: "UI/UX Designer",
+        Description: "Redesigned dashboard interface for logistics software.",
+        SubmissionDate: "30 Nov 24",
+        status: "Requested",
+        statusRemark:"NO RESPONSE"
+      },
+      {
+        Category:"Coding Projects",
+        Designation: "Full Stack Developer",
+        Description: "Website design for government project.",
+        SubmissionDate: "27 May 25",
+        status: "Active",
+        statusRemark:"",
+      },
+      {
+        Category:"Coding Projects",
+        Designation: "Frontend Developer",
+        Description: "Developed responsive UI for healthcare portal.",
+        SubmissionDate: "10 Apr 25",
+        status: "Accepted",
+        statusRemark:"SUBMISSION PENDING",
+      },
+      {
+        Category:"Coding Projects",
+        Designation: "Backend Developer",
+        Description: "Created secure APIs for financial transaction system.",
+        SubmissionDate: "05 Mar 25",
+        status: "Requested",
+        statusRemark:"ACCEPTED"
+      },
+      {
+        Category:"Research Papers",
+        Designation: "DevOps Engineer",
+        Description: "Automated CI/CD pipelines and deployed to AWS.",
+        SubmissionDate: "12 Jan 25",
+        status: "Active",
+        statusRemark:""
+      },
+      {
+        Category:"Research Papers",
+        Designation: "UI/UX Designer",
+        Description: "Redesigned dashboard interface for logistics software.",
+        SubmissionDate: "30 Nov 24",
+        status: "Accepted",
+        statusRemark:"Submitted"
+      },
+      {
+        Category:"Plagarism Removal",
+        Designation: "UI/UX Designer",
+        Description: "Redesigned dashboard interface for logistics software.",
+        SubmissionDate: "30 Nov 24",
+        status: "Requested",
+        statusRemark:"NO RESPONSE"
+      },
+      {
+        Category:"Plagarism Removal",
+        Designation: "Full Stack Developer",
+        Description: "Website design for government project.",
+        SubmissionDate: "27 May 25",
+        status: "Active",
+        statusRemark:"",
+      },
+      {
+        Category:"Plagarism Removal",
+        Designation: "Frontend Developer",
+        Description: "Developed responsive UI for healthcare portal.",
+        SubmissionDate: "10 Apr 25",
+        status: "Accepted",
+        statusRemark:"SUBMISSION PENDING",
+      },
+      {
+        Category:"Plagarism Removal",
+        Designation: "Backend Developer",
+        Description: "Created secure APIs for financial transaction system.",
+        SubmissionDate: "05 Mar 25",
+        status: "Requested",
+        statusRemark:"ACCEPTED"
+      },
+      {
+        Category:"Immediate Deadline Projects",
+        Designation: "DevOps Engineer",
+        Description: "Automated CI/CD pipelines and deployed to AWS.",
+        SubmissionDate: "12 Jan 25",
+        status: "Active",
+        statusRemark:""
+      },
+      {
+        Category:"Immediate Deadline Projects",
+        Designation: "UI/UX Designer",
+        Description: "Redesigned dashboard interface for logistics software.",
+        SubmissionDate: "30 Nov 24",
+        status: "Accepted",
+        statusRemark:"Submitted"
+      },
+      {
+        Category:"Immediate Deadline Projects",
         Designation: "UI/UX Designer",
         Description: "Redesigned dashboard interface for logistics software.",
         SubmissionDate: "30 Nov 24",
@@ -269,6 +359,7 @@ interface MultipleEmployeeProps{
     Profile:string[];
 }
     interface TeamLeaderProjectDetailsProps {
+      Category:string;
     Designation: string;
     Description: string;
     SubmissionDate: string;
@@ -281,9 +372,10 @@ interface MultipleEmployeeProps{
   interface TeamLeaderLandingProps {
     ProjectDetails: TeamLeaderProjectDetailsProps[];
   }
-  const teamLeaderLanding: TeamLeaderLandingProps = {
+const teamLeaderLanding: TeamLeaderLandingProps = {
   ProjectDetails: [
     {
+      Category: "Coding Projects",
       Designation: "Full Stack Developer",
       Description: "Government e-portal design.",
       SubmissionDate: "01 Jan 25",
@@ -301,6 +393,7 @@ interface MultipleEmployeeProps{
       ]
     },
     {
+      Category: "UI Design Projects",
       Designation: "UI Designer",
       Description: "Healthcare app redesign.",
       SubmissionDate: "03 Jan 25",
@@ -310,12 +403,14 @@ interface MultipleEmployeeProps{
       ]
     },
     {
+      Category: "Coding Projects",
       Designation: "Backend Developer",
       Description: "Inventory management APIs.",
       SubmissionDate: "06 Jan 25",
       status: "Active",
     },
     {
+      Category: "Research Papers",
       Designation: "QA Engineer",
       Description: "App bug testing and report.",
       SubmissionDate: "09 Jan 25",
@@ -323,20 +418,7 @@ interface MultipleEmployeeProps{
       statusRemark: "Reports Submitted"
     },
     {
-      Designation: "Mobile App Dev",
-      Description: "E-learning app build",
-      SubmissionDate: "12 Jan 25",
-      status: "Employees",
-      MultipleEmployee: [
-        {
-          Profile: [
-            "https://randomuser.me/api/portraits/men/4.jpg",
-            "https://randomuser.me/api/portraits/women/5.jpg"
-          ]
-        }
-      ]
-    },
-    {
+      Category: "Immediate Deadline Projects",
       Designation: "DevOps Engineer",
       Description: "CI/CD pipeline setup",
       SubmissionDate: "15 Jan 25",
@@ -350,12 +432,12 @@ interface MultipleEmployeeProps{
             "https://randomuser.me/api/portraits/men/6.jpg",
             "https://randomuser.me/api/portraits/men/6.jpg",
             "https://randomuser.me/api/portraits/men/6.jpg",
-            
           ]
         }
       ]
     },
     {
+      Category: "UI Design Projects",
       Designation: "Frontend Dev",
       Description: "Landing page UI revamp",
       SubmissionDate: "17 Jan 25",
@@ -365,12 +447,14 @@ interface MultipleEmployeeProps{
       ]
     },
     {
+      Category: "Coding Projects",
       Designation: "Backend Dev",
       Description: "Secure payments integration",
       SubmissionDate: "19 Jan 25",
       status: "Active",
     },
     {
+      Category: "UI Design Projects",
       Designation: "UX Designer",
       Description: "Feedback flows rework",
       SubmissionDate: "22 Jan 25",
@@ -378,20 +462,7 @@ interface MultipleEmployeeProps{
       statusRemark: "Design handoff done"
     },
     {
-      Designation: "iOS Developer",
-      Description: "Health tracker app",
-      SubmissionDate: "25 Jan 25",
-      status: "Employees",
-      MultipleEmployee: [
-        {
-          Profile: [
-            "https://randomuser.me/api/portraits/men/8.jpg",
-            "https://randomuser.me/api/portraits/women/9.jpg"
-          ]
-        }
-      ]
-    },
-    {
+      Category: "Data Science Projects",
       Designation: "ML Engineer",
       Description: "Prediction model for sales",
       SubmissionDate: "28 Jan 25",
@@ -403,6 +474,7 @@ interface MultipleEmployeeProps{
       ]
     },
     {
+      Category: "Research Papers",
       Designation: "Software Tester",
       Description: "Regression testing",
       SubmissionDate: "30 Jan 25",
@@ -412,12 +484,14 @@ interface MultipleEmployeeProps{
       ]
     },
     {
+      Category: "Plagarism Removal",
       Designation: "System Admin",
       Description: "Firewall setup",
       SubmissionDate: "02 Feb 25",
       status: "Active",
     },
     {
+      Category: "Data Science Projects",
       Designation: "Data Analyst",
       Description: "KPI dashboard",
       SubmissionDate: "04 Feb 25",
@@ -425,17 +499,7 @@ interface MultipleEmployeeProps{
       statusRemark: "Dashboard live"
     },
     {
-      Designation: "Flutter Dev",
-      Description: "Attendance app",
-      SubmissionDate: "06 Feb 25",
-      status: "Employees",
-      MultipleEmployee: [
-        {
-          Profile: ["https://randomuser.me/api/portraits/women/12.jpg"]
-        }
-      ]
-    },
-    {
+      Category: "UI Design Projects",
       Designation: "Product Designer",
       Description: "Design system audit",
       SubmissionDate: "08 Feb 25",
@@ -447,6 +511,7 @@ interface MultipleEmployeeProps{
       ]
     },
     {
+      Category: "UI Design Projects",
       Designation: "Frontend Dev",
       Description: "Marketing page",
       SubmissionDate: "10 Feb 25",
@@ -456,12 +521,14 @@ interface MultipleEmployeeProps{
       ]
     },
     {
+      Category: "Coding Projects",
       Designation: "Java Dev",
       Description: "Banking microservices",
       SubmissionDate: "12 Feb 25",
       status: "Active",
     },
     {
+      Category: "UI Design Projects",
       Designation: "UI Intern",
       Description: "Color system revamp",
       SubmissionDate: "14 Feb 25",
@@ -469,17 +536,7 @@ interface MultipleEmployeeProps{
       statusRemark: "Merged in master"
     },
     {
-      Designation: "Backend Dev",
-      Description: "Database schema refactor",
-      SubmissionDate: "16 Feb 25",
-      status: "Employees",
-      MultipleEmployee: [
-        {
-          Profile: ["https://randomuser.me/api/portraits/women/15.jpg"]
-        }
-      ]
-    },
-    {
+      Category: "Plagarism Removal",
       Designation: "Security Engineer",
       Description: "Pen-testing tools",
       SubmissionDate: "18 Feb 25",
@@ -491,6 +548,7 @@ interface MultipleEmployeeProps{
       ]
     },
     {
+      Category: "UI Design Projects",
       Designation: "React Native Dev",
       Description: "Social app prototype",
       SubmissionDate: "20 Feb 25",
@@ -500,31 +558,23 @@ interface MultipleEmployeeProps{
       ]
     },
     {
+      Category: "Coding Projects",
       Designation: "Node.js Developer",
       Description: "Socket integration",
       SubmissionDate: "22 Feb 25",
       status: "Active",
     },
     {
+      Category: "Research Papers",
       Designation: "UX Intern",
       Description: "Design tokens setup",
       SubmissionDate: "24 Feb 25",
       status: "Completed",
       statusRemark: "Project closed"
     },
-    {
-      Designation: "Cloud Architect",
-      Description: "Infrastructure setup on GCP",
-      SubmissionDate: "26 Feb 25",
-      status: "Employees",
-      MultipleEmployee: [
-        {
-          Profile: ["https://randomuser.me/api/portraits/men/18.jpg"]
-        }
-      ]
-    }
   ]
 };
+
 
   // 
   interface EmployeeProjectInfoProps {
@@ -607,6 +657,10 @@ interface MultipleEmployeeProps{
            <Route
             path="/teamleaderlanding"
             element={<TeamLeaderLanding {...teamLeaderLanding} />}
+          />
+          <Route
+            path="/allemployeelist"
+            element={<AllEmployeeList />}
           />
         </Routes>
       </Router>

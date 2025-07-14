@@ -6,23 +6,40 @@ import Button1 from "../UI_Components/Buttons/Button1";
 import PaginationNav from "../UI_Components/Navigations/PaginationNav";
 import MainNavigation from "../UI_Components/Navigations/MainNavigation";
 import { TbFilterBolt } from "react-icons/tb";
+import EmployeeProfile from "./EmployeeProfile";
+import UserProfile from "../assets/CredientialAssets/UserProfile.jpg";
 
 interface ProjectDetailsProps {
+  Category: string;
   Designation: string;
   Description: string;
   SubmissionDate: string;
-    status: string;
-    statusRemark:string;
-
+  status: string;
+  statusRemark: string;
 }
 
 interface EmployeeLandingProps {
   ProjectDetails: ProjectDetailsProps[];
-
 }
 
 const EmployeeLanding: React.FC<EmployeeLandingProps> = ({ ProjectDetails }) => {
   const tabs = ["Active", "Accepted", "Requested", "Performance"];
+  const employeeProfile = {
+    EmployeeName: "Himanshu Verma",
+    Profile: UserProfile,
+    Designation: "CEO",
+    TL: "NONE",
+    ProjectStartDate: "1 June",
+    ProjectEndDate: "1 Sep",
+    ProjectOnGoing: 10,
+    ProjectCompleted: 20,
+    Performance: [
+      { label: "Accuracy", value: "90%" },
+      { label: "On Time Execution", value: "70%" },
+      { label: "Skills", value: "80%" },
+      { label: "Efficiency", value: "75%" },
+    ],
+  };
   const filters = [
     "Data Science Projects",
     "UI Design Projects",
@@ -33,20 +50,22 @@ const EmployeeLanding: React.FC<EmployeeLandingProps> = ({ ProjectDetails }) => 
   ];
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedFilters, setSelectedFilters] = useState<string[]>([]); // New state for selected filters
   const [showFilter, setShowFilter] = useState(false);
   const [renderDrawer, setRenderDrawer] = useState(false);
   const [drawerVisible, setDrawerVisible] = useState(false);
-  const [activeTab, setActiveTab] = useState(tabs[0]); // Manage activeTab state
+  const [activeTab, setActiveTab] = useState(tabs[0]);
   const itemsPerPage = 6;
 
-  // Filter ProjectDetails based on search query and activeTab
+  // Filter ProjectDetails based on search query, activeTab, and selected filters
   const filteredItems = ProjectDetails.filter(
     (item) =>
-      item.status === activeTab && // Filter by active tab
+      item.status === activeTab &&
       (item.Designation.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.Description.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.SubmissionDate.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.statusRemark.toLowerCase().includes(searchQuery.toLowerCase()) )
+        item.statusRemark.toLowerCase().includes(searchQuery.toLowerCase())) &&
+      (selectedFilters.length === 0 || selectedFilters.includes(item.Category))
   );
 
   const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
@@ -54,10 +73,10 @@ const EmployeeLanding: React.FC<EmployeeLandingProps> = ({ ProjectDetails }) => 
   const endIndex = startIndex + itemsPerPage;
   const currentItems = filteredItems.slice(startIndex, endIndex);
 
-  // Reset to first page when search query or activeTab changes
+  // Reset to first page when search query, activeTab, or selectedFilters change
   useEffect(() => {
     setCurrentPage(1);
-  }, [searchQuery, activeTab]);
+  }, [searchQuery, activeTab, selectedFilters]);
 
   const [width, setWidth] = useState(window.innerWidth);
   useEffect(() => {
@@ -117,7 +136,7 @@ const EmployeeLanding: React.FC<EmployeeLandingProps> = ({ ProjectDetails }) => 
         </div>
       </div>
       <div className={`flex w-full gap-x-5 items-start shrink-0 flex-row`}>
-        {(isXXS || isXS || isSM || isMD) ? (
+        {(isXXS || isXS || isSM || isMD || activeTab === tabs[3]) ? (
           renderDrawer && (
             <div
               className={`
@@ -126,82 +145,109 @@ const EmployeeLanding: React.FC<EmployeeLandingProps> = ({ ProjectDetails }) => 
                 ${drawerVisible ? "translate-x-0" : "-translate-x-full"}
               `}
             >
-              <Filter filters={filters} setClose={() => setShowFilter(false)} />
+              <Filter
+                filters={filters}
+                setClose={() => setShowFilter(false)}
+                setSelectedFilters={setSelectedFilters} // Pass callback to update selected filters
+              />
             </div>
           )
         ) : (
           <div className="w-[25%] mt-2">
-            <Filter filters={filters} setClose={setShowFilter} />
+            <Filter
+              filters={filters}
+              setClose={setShowFilter}
+              setSelectedFilters={setSelectedFilters} // Pass callback to update selected filters
+            />
           </div>
         )}
-        <div className={`flex flex-col ${isXXS || isXS || isSM || isMD ? "w-full" : "w-[75%]"}`}>
+        <div
+          className={`flex flex-col ${
+            isXXS || isXS || isSM || isMD
+              ? "w-full"
+              : activeTab === tabs[3]
+              ? "w-full flex"
+              : "w-[75%]"
+          }`}
+        >
           <div
             className={`items-center flex ${
-              isXXS || isXS || isSM || isMD ? "w-full" : "justify-start w-fit px-15"
+              isXXS || isXS || isSM || isMD
+                ? "w-full"
+                : activeTab === tabs[3]
+                ? "w-full flex items-center"
+                : "justify-start w-fit px-5"
             }`}
           >
             <Navigation1 tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} />
           </div>
-          {/* Table */}
-          <div className="overflow-x-auto">
-            {currentItems.length > 0 ? (
-              currentItems.map((item, index) => (
-                <div
-                  key={index}
-                  className={`flex justify-start items-start ${
-                    index === currentItems.length - 1 ? "mt-7" : "my-7"
-                  } w-full min-w-[700px] flex-col`}
-                >
-                  <div className="flex flex-col-reverse items-start justify-start w-full">
-                    <div>
-                      <Button1
-                        width="w-[180px]"
-                        gradientType="gradient1"
-                        text={`${is2XL ? "text-[15px]" : "text-[12px]"}`}
-                        value={item.Designation}
-                      />
+          {activeTab !== tabs[3] ? (
+            // Table
+            <div className="overflow-x-auto">
+              {currentItems.length > 0 ? (
+                currentItems.map((item, index) => (
+                  <div
+                    key={index}
+                    className={`flex justify-start items-start ${
+                      index === currentItems.length - 1 ? "mt-7" : "my-7"
+                    } w-full min-w-[700px] flex-col`}
+                  >
+                    <div className="flex flex-col-reverse items-start justify-start w-full">
+                      <div>
+                        <Button1
+                          width="w-[180px]"
+                          gradientType="gradient1"
+                          text={`${is2XL ? "text-[15px]" : "text-[12px]"}`}
+                          value={item.Designation}
+                        />
+                      </div>
+                      <div className="border-t-2 border-[#000000] w-full"></div>
                     </div>
-                    <div className="border-t-2 border-[#000000] w-full"></div>
-                  </div>
-                  <div className="flex mt-3 w-full pl-[2vw] justify-between items-center">
-                    <div
-                      className={`text-[#000000] w-[35%] text-start flex font-normal ${
-                        is2XL ? "text-[15px]" : "text-[12px]"
-                      } -tracking-[0.02rem]`}
-                    >
-                      {item.Description}
-                    </div>
-                    <div
-                      className={`text-[#000000] font-normal flex justify-center w-[35%] ${
-                        is2XL ? "text-[15px]" : "text-[12px]"
-                      } -tracking-[0.02rem]`}
-                    >
-                      Submission Date: {item.SubmissionDate}
-                    </div>
-                    
+                    <div className="flex mt-3 w-full pl-[2vw] justify-between items-center">
+                      <div
+                        className={`text-[#000000] w-[35%] text-start flex font-normal ${
+                          is2XL ? "text-[15px]" : "text-[12px]"
+                        } -tracking-[0.02rem]`}
+                      >
+                        {item.Description}
+                      </div>
+                      <div
+                        className={`text-[#000000] font-normal flex justify-center w-[35%] ${
+                          is2XL ? "text-[15px]" : "text-[12px]"
+                        } -tracking-[0.02rem]`}
+                      >
+                        Submission Date: {item.SubmissionDate}
+                      </div>
                       <div
                         className={`text-[#000000] w-[30%] font-normal text-[12px] -tracking-[0.02rem]`}
                       >
                         {item.statusRemark}
                       </div>
+                    </div>
                   </div>
+                ))
+              ) : (
+                <div className="text-[#000000] text-[14px] font-normal mt-7">
+                  No results found
                 </div>
-              ))
-            ) : (
-              <div className="text-[#000000] text-[14px] font-normal mt-7">
-                No results found
-              </div>
-            )}
-          </div>
+              )}
+            </div>
+          ) : (
+            <div className="py-10">
+              <EmployeeProfile {...employeeProfile} />
+            </div>
+          )}
         </div>
       </div>
-      <div className="mt-8">
-        <PaginationNav
-          total={totalPages}
-          current={currentPage}
-          onPageChange={setCurrentPage}
-        />
-      </div>
+      {activeTab !== tabs[3] && (
+        <div className="mt-8">
+          <PaginationNav
+            total={totalPages}
+            current={currentPage}
+            onPageChange={setCurrentPage}
+          />
+        </div>
+      )}
     </div>
   );
 };

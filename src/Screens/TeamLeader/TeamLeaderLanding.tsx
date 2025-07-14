@@ -15,6 +15,7 @@ interface MultipleEmployeeProps {
   Profile: string[];
 }
 interface TeamLeaderProjectDetailsProps {
+  Category:string;
   Designation: string;
   Description: string;
   SubmissionDate: string;
@@ -28,9 +29,7 @@ interface TeamLeaderLandingProps {
   ProjectDetails: TeamLeaderProjectDetailsProps[];
 }
 
-const TeamLeaderLanding: React.FC<TeamLeaderLandingProps> = ({
-  ProjectDetails,
-}) => {
+const TeamLeaderLanding: React.FC<TeamLeaderLandingProps> = ({ProjectDetails}) => {
   const tabs = ["Requests", "Active", "On-Going", "Completed", "Employees"];
   const filters = [
     "Data Science Projects",
@@ -43,6 +42,7 @@ const TeamLeaderLanding: React.FC<TeamLeaderLandingProps> = ({
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
   const [showFilter, setShowFilter] = useState(false);
+  const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
   const [renderDrawer, setRenderDrawer] = useState(false);
   const [drawerVisible, setDrawerVisible] = useState(false);
   const [activeTab, setActiveTab] = useState(tabs[0]); // Manage activeTab state
@@ -55,7 +55,8 @@ const TeamLeaderLanding: React.FC<TeamLeaderLandingProps> = ({
       (item.Designation.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.Description.toLowerCase().includes(searchQuery.toLowerCase()) ||
         item.SubmissionDate.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.statusRemark?.toLowerCase().includes(searchQuery.toLowerCase()))
+        item.statusRemark?.toLowerCase().includes(searchQuery.toLowerCase())) &&
+      (selectedFilters.length === 0 || selectedFilters.includes(item.Category))
   );
 
   const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
@@ -138,12 +139,12 @@ const TeamLeaderLanding: React.FC<TeamLeaderLandingProps> = ({
                 ${drawerVisible ? "translate-x-0" : "-translate-x-full"}
               `}
             >
-              <Filter filters={filters} setClose={() => setShowFilter(false)} />
+              <Filter setSelectedFilters={setSelectedFilters} filters={filters} setClose={() => setShowFilter(false)} />
             </div>
           )
         ) : (
           <div className="w-[25%] mt-2">
-            <Filter filters={filters} setClose={setShowFilter} />
+            <Filter setSelectedFilters={setSelectedFilters} filters={filters} setClose={setShowFilter} />
           </div>
         )}
         <div
@@ -162,7 +163,8 @@ const TeamLeaderLanding: React.FC<TeamLeaderLandingProps> = ({
               setActiveTab={setActiveTab}
             />
           </div>
-          {/* Table */}
+          {!(activeTab===tabs[4])?
+          // table
           <div className="overflow-x-auto">
             {currentItems.length > 0 ? (
               currentItems.map((item, index) => (
@@ -213,8 +215,7 @@ const TeamLeaderLanding: React.FC<TeamLeaderLandingProps> = ({
                           </div>
                         ))}
                       </div>
-                    ) : item.status === "Active" ||
-                      item.status === "Employees" ? (
+                    ) : item.status === "Active" ? (
                       <div
                         className={`text-[#000000] w-[30%] font-normal text-[12px] -tracking-[0.02rem]`}
                       >
@@ -228,7 +229,7 @@ const TeamLeaderLanding: React.FC<TeamLeaderLandingProps> = ({
                       </div>
                     ) : (
                       item.status === "Requests" && (
-                        <div>
+                        <div className="w-[35%] justify-center flex">
                             {/* multiple images */}
                           {item.MultipleEmployee?.map((employee, index) => {
   const profiles = employee.Profile;
@@ -268,16 +269,20 @@ const TeamLeaderLanding: React.FC<TeamLeaderLandingProps> = ({
                 No results found
               </div>
             )}
-          </div>
+          </div>:
+          <div>
+            Head all employee list
+            </div>}
         </div>
       </div>
+      {!(activeTab===tabs[4]) &&
       <div className="mt-8">
         <PaginationNav
           total={totalPages}
           current={currentPage}
           onPageChange={setCurrentPage}
         />
-      </div>
+      </div>}
     </div>
   );
 };

@@ -35,7 +35,7 @@ const EmployeeProfile:React.FC<EmployeeProfileProps> = ({EmployeeName, Designati
     const isXL = width > 1280 && width <= 1536;
     const is2XL = width > 1536;
   return (
-    <div className={`flex items-center ${isXXS || isXS ?"": (isMD || isLG  || is2XL)?"min-h-screen py-[20vh] justify-center overflow-auto ":" justify-center overflow-auto min-h-screen py-[20vh]"} justify-center`}>
+    <div className={`flex items-center ${isXXS || isXS ?"": (isMD || isLG  || is2XL)?"justify-center overflow-auto ":" justify-center overflow-auto"} justify-center`}>
       <MainNavigation isMenuHide={false} />
 
     <div className={`w-full  ${isXXS || isXS || isSM || isMD || isLG?"":"flex items-end justify-center"} ${isXXS || isXS ?"pt-15 pb-10":""}   ${isXL ?" items-center justify-center  gap-15": is2XL?"gap-35": isLG?"px-[2vw]":""}  `}>
