@@ -9,6 +9,7 @@ import EmployeeLanding from "./Screens/EmployeeLanding";
 import EmployeeProjectInfo from "./Screens/EmployeeProjectInfo";
 import TeamLeaderLanding from "./Screens/TeamLeader/TeamLeaderLanding";
 import AllEmployeeList from "./Screens/AllEmployeeList";
+import HeadProjectList from "./Screens/HeadProjectList";
 
 function App() {
   interface PerformanceProps {
@@ -242,7 +243,7 @@ function App() {
         Description: "Redesigned dashboard interface for logistics software.",
         SubmissionDate: "30 Nov 24",
         status: "Accepted",
-        statusRemark:"Submitted"
+        statusRemark:"SUBMITTED"
       },
       {
         Category:"UI Design Projects",
@@ -274,7 +275,7 @@ function App() {
         Description: "Created secure APIs for financial transaction system.",
         SubmissionDate: "05 Mar 25",
         status: "Requested",
-        statusRemark:"ACCEPTED"
+        statusRemark:"DECLINED"
       },
       {
         Category:"Research Papers",
@@ -290,7 +291,7 @@ function App() {
         Description: "Redesigned dashboard interface for logistics software.",
         SubmissionDate: "30 Nov 24",
         status: "Accepted",
-        statusRemark:"Submitted"
+        statusRemark:"SUBMITTED"
       },
       {
         Category:"Plagarism Removal",
@@ -298,7 +299,7 @@ function App() {
         Description: "Redesigned dashboard interface for logistics software.",
         SubmissionDate: "30 Nov 24",
         status: "Requested",
-        statusRemark:"NO RESPONSE"
+        statusRemark:"DECLINED"
       },
       {
         Category:"Plagarism Removal",
@@ -338,7 +339,7 @@ function App() {
         Description: "Redesigned dashboard interface for logistics software.",
         SubmissionDate: "30 Nov 24",
         status: "Accepted",
-        statusRemark:"Submitted"
+        statusRemark:"SUBMISSION PENDING"
       },
       {
         Category:"Immediate Deadline Projects",
@@ -346,7 +347,7 @@ function App() {
         Description: "Redesigned dashboard interface for logistics software.",
         SubmissionDate: "30 Nov 24",
         status: "Requested",
-        statusRemark:"NO RESPONSE"
+        statusRemark:"DECLINED"
       },
     ],
   };
@@ -415,7 +416,7 @@ const teamLeaderLanding: TeamLeaderLandingProps = {
       Description: "App bug testing and report.",
       SubmissionDate: "09 Jan 25",
       status: "Completed",
-      statusRemark: "Reports Submitted"
+      statusRemark: "SUBMISSION PENDING"
     },
     {
       Category: "Immediate Deadline Projects",
@@ -459,7 +460,7 @@ const teamLeaderLanding: TeamLeaderLandingProps = {
       Description: "Feedback flows rework",
       SubmissionDate: "22 Jan 25",
       status: "Completed",
-      statusRemark: "Design handoff done"
+      statusRemark: "SUBMISSION PENDING"
     },
     {
       Category: "Data Science Projects",
@@ -496,7 +497,7 @@ const teamLeaderLanding: TeamLeaderLandingProps = {
       Description: "KPI dashboard",
       SubmissionDate: "04 Feb 25",
       status: "Completed",
-      statusRemark: "Dashboard live"
+      statusRemark: "SUBMITTED"
     },
     {
       Category: "UI Design Projects",
@@ -533,7 +534,7 @@ const teamLeaderLanding: TeamLeaderLandingProps = {
       Description: "Color system revamp",
       SubmissionDate: "14 Feb 25",
       status: "Completed",
-      statusRemark: "Merged in master"
+      statusRemark: "SUBMITTED"
     },
     {
       Category: "Plagarism Removal",
@@ -570,7 +571,7 @@ const teamLeaderLanding: TeamLeaderLandingProps = {
       Description: "Design tokens setup",
       SubmissionDate: "24 Feb 25",
       status: "Completed",
-      statusRemark: "Project closed"
+      statusRemark: "SUBMISSION PENDING"
     },
   ]
 };
@@ -629,6 +630,213 @@ const teamLeaderLanding: TeamLeaderLandingProps = {
     Deadline:"I'm looking to get this UI fully operational within 2 weeks from the project start date."
   };
 
+  interface ProjectListProps {
+  Category: string;
+  Description: string;
+  EmployeeName:string;
+  ProjectId:string;
+  SubmissionDate: string;
+  ComplitionPercentage:number;
+  Price:number;
+}
+
+interface HeadProjectListProps {
+  ProjectDetails: ProjectListProps[];
+}
+  const headProjectList:HeadProjectListProps={
+ProjectDetails: [
+  {
+    Category: "Data Science Projects",
+    Description: "Design for office use application.",
+    EmployeeName: "Manish Dhubkarya",
+    ProjectId: "GHTY565PL",
+    SubmissionDate: "27 May 25",
+    ComplitionPercentage: 40,
+    Price: 3480
+  },
+  {
+    Category: "UI Design Projects",
+    Description: "Mobile UI for eCommerce app.",
+    EmployeeName: "Riya Sharma",
+    ProjectId: "UIDS782MN",
+    SubmissionDate: "30 Jul 25",
+    ComplitionPercentage: 75,
+    Price: 4100
+  },
+  {
+    Category: "Coding Projects",
+    Description: "Backend API integration with Node.js.",
+    EmployeeName: "Amit Singh",
+    ProjectId: "CODE291AX",
+    SubmissionDate: "12 Aug 25",
+    ComplitionPercentage: 60,
+    Price: 5200
+  },
+  {
+    Category: "Research Papers",
+    Description: "AI in modern education system.",
+    EmployeeName: "Sneha Verma",
+    ProjectId: "RSCH103QW",
+    SubmissionDate: "03 Sep 25",
+    ComplitionPercentage: 90,
+    Price: 2750
+  },
+  {
+    Category: "Plagarism Removal",
+    Description: "Rewriting and uniqueness improvement.",
+    EmployeeName: "Mohit Yadav",
+    ProjectId: "PLGR856ZD",
+    SubmissionDate: "18 Jul 25",
+    ComplitionPercentage: 100,
+    Price: 2200
+  },
+  {
+    Category: "Immediate Deadline Projects",
+    Description: "Urgent business report formatting.",
+    EmployeeName: "Kavya Mehra",
+    ProjectId: "IMM874TD",
+    SubmissionDate: "15 Jul 25",
+    ComplitionPercentage: 95,
+    Price: 3900
+  },
+  {
+    Category: "Data Science Projects",
+    Description: "Data visualization for financial trends.",
+    EmployeeName: "Vivek Choudhary",
+    ProjectId: "DS325KLP",
+    SubmissionDate: "29 Aug 25",
+    ComplitionPercentage: 55,
+    Price: 6300
+  },
+  {
+    Category: "UI Design Projects",
+    Description: "Dashboard UI for admin panel.",
+    EmployeeName: "Tanvi Joshi",
+    ProjectId: "UID204XZ",
+    SubmissionDate: "21 Aug 25",
+    ComplitionPercentage: 45,
+    Price: 4800
+  },
+  {
+    Category: "Coding Projects",
+    Description: "Authentication system using Firebase.",
+    EmployeeName: "Raj Malhotra",
+    ProjectId: "CODE674WM",
+    SubmissionDate: "02 Sep 25",
+    ComplitionPercentage: 70,
+    Price: 5100
+  },
+  {
+    Category: "Research Papers",
+    Description: "Study of Quantum Computing methods.",
+    EmployeeName: "Simran Kaur",
+    ProjectId: "RSCH210GY",
+    SubmissionDate: "14 Sep 25",
+    ComplitionPercentage: 30,
+    Price: 3000
+  },
+  {
+    Category: "Plagarism Removal",
+    Description: "Remove duplication from thesis.",
+    EmployeeName: "Aakash Jain",
+    ProjectId: "PLGR984ND",
+    SubmissionDate: "17 Jul 25",
+    ComplitionPercentage: 100,
+    Price: 1800
+  },
+  {
+    Category: "Immediate Deadline Projects",
+    Description: "Final year project report submission.",
+    EmployeeName: "Shruti Deshmukh",
+    ProjectId: "IMM903TR",
+    SubmissionDate: "16 Jul 25",
+    ComplitionPercentage: 88,
+    Price: 4400
+  },
+  {
+    Category: "Data Science Projects",
+    Description: "Predictive model for traffic data.",
+    EmployeeName: "Pranav Mishra",
+    ProjectId: "DS590BYT",
+    SubmissionDate: "05 Sep 25",
+    ComplitionPercentage: 35,
+    Price: 5900
+  },
+  {
+    Category: "UI Design Projects",
+    Description: "App design for meditation tracker.",
+    EmployeeName: "Neha Rathi",
+    ProjectId: "UID778QE",
+    SubmissionDate: "10 Aug 25",
+    ComplitionPercentage: 50,
+    Price: 4600
+  },
+  {
+    Category: "Coding Projects",
+    Description: "To-do list app with React & Redux.",
+    EmployeeName: "Arjun Kumar",
+    ProjectId: "CODE340LP",
+    SubmissionDate: "20 Aug 25",
+    ComplitionPercentage: 40,
+    Price: 3900
+  },
+  {
+    Category: "Research Papers",
+    Description: "Blockchain impact on data security.",
+    EmployeeName: "Roshni Agarwal",
+    ProjectId: "RSCH561VU",
+    SubmissionDate: "22 Aug 25",
+    ComplitionPercentage: 65,
+    Price: 3200
+  },
+  {
+    Category: "Plagarism Removal",
+    Description: "Research paper paraphrasing.",
+    EmployeeName: "Karan Kapoor",
+    ProjectId: "PLGR212AD",
+    SubmissionDate: "19 Jul 25",
+    ComplitionPercentage: 85,
+    Price: 2500
+  },
+  {
+    Category: "Immediate Deadline Projects",
+    Description: "Emergency bio project completion.",
+    EmployeeName: "Divya Rana",
+    ProjectId: "IMM182KT",
+    SubmissionDate: "15 Jul 25",
+    ComplitionPercentage: 97,
+    Price: 3700
+  },
+  {
+    Category: "Data Science Projects",
+    Description: "Customer churn prediction model.",
+    EmployeeName: "Rahul Tripathi",
+    ProjectId: "DS908PLX",
+    SubmissionDate: "11 Sep 25",
+    ComplitionPercentage: 42,
+    Price: 6700
+  },
+  {
+    Category: "UI Design Projects",
+    Description: "Modern portfolio UI for freelancers.",
+    EmployeeName: "Isha Jain",
+    ProjectId: "UID654QW",
+    SubmissionDate: "18 Aug 25",
+    ComplitionPercentage: 58,
+    Price: 4300
+  },
+  {
+    Category: "Coding Projects",
+    Description: "REST API for task management system.",
+    EmployeeName: "Yash Meena",
+    ProjectId: "CODE490XP",
+    SubmissionDate: "28 Aug 25",
+    ComplitionPercentage: 66,
+    Price: 5000
+  }
+]
+  }
+
   return (
     <div className="font-librefranklin">
       <Router>
@@ -661,6 +869,10 @@ const teamLeaderLanding: TeamLeaderLandingProps = {
           <Route
             path="/allemployeelist"
             element={<AllEmployeeList />}
+          />
+          <Route
+            path="/headprojectlist"
+            element={<HeadProjectList {...headProjectList} />}
           />
         </Routes>
       </Router>

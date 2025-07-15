@@ -83,6 +83,18 @@ const ClientProfile: React.FC<ClientProfileProps> = ({
   const endIndex = startIndex + itemsPerPage;
   const currentItems = sortedProjectDetails.slice(startIndex, endIndex);
 
+   const maxTextLength = Math.max(
+    ...ProjectDetails.map((item) => (item.Workstream).length)
+  );
+
+  // Decide width class based on max text length
+  const widthClass =
+    maxTextLength > 30
+      ? "w-[300px]"
+      : maxTextLength > 20
+      ? "w-[250px]"
+      : "w-[150px]";
+
   return (
     <div
       className={`flex flex-col w-full ${
@@ -213,6 +225,7 @@ const ClientProfile: React.FC<ClientProfileProps> = ({
                     <div className="flex flex-col-reverse items-start justify-start w-full">
                       <div>
                         <Button1
+                        width={widthClass}
                           gradientType={item.status.toLowerCase() === "submitted" ? "" : "gradient1"}
                           text={`${is2XL ? "text-[15px]" : "text-[12px]"} `}
                           value="UI Designer"
@@ -222,7 +235,7 @@ const ClientProfile: React.FC<ClientProfileProps> = ({
                     </div>
                     <div
                       className={`flex mt-3 w-full pl-[2vw] justify-between items-center ${
-                        item.status === "Submitted" ? "text-[#474747]" : "text-[#FF0000]"
+                        item.status.toLowerCase() === "submitted" ? "text-[#474747]" : "text-[#FF0000]"
                       } `}
                     >
                       <div

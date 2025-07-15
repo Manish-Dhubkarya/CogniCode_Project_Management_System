@@ -35,11 +35,11 @@ const AllEmployeeList = () => {
   const is2XL = width > 1536;
 
   return (
-    <div className="flex flex-col w-full text-[12px] px-10 py-5 space-y-10">
+    <div className={`flex flex-col w-full text-[12px]  py-5 space-y-10`}>
 
       {/* -------- Team Leaders -------- */}
       <div className="w-full space-y-5">
-        <div className="text-[20px] w-fit font-medium -tracking-[0.02rem]">
+        <div className={`${isXS || isSM?"text-[15px]":isMD?"text-[18px]":"text-[20px]"}  w-fit font-medium -tracking-[0.02rem]`}>
           Team Leaders
         </div>
 
@@ -59,8 +59,8 @@ const AllEmployeeList = () => {
         </div>
 
         {/* Medium and up: Grid Layout */}
-        <div className={`hidden md:grid  items-end gap-x-5 gap-y-5
-          ${is2XL ? "grid-cols-5" : isXL ? "grid-cols-4" : isLG ? "grid-cols-3" : isMD ? "grid-cols-2" : "grid-cols-1"}`}>
+        <div className={`hidden md:grid  items-end custom-indent-wrap gap-x-5 gap-y-5
+          ${isMD || isLG || isXL || is2XL ?"grid-cols-3" : "grid-cols-1"}`}>
           {teamLeaders.map((leader, index) => (
             <div key={index} className="bg-white">
               <ProfileWithDesignation
@@ -75,13 +75,13 @@ const AllEmployeeList = () => {
 
       {/* -------- Employees: Design -------- */}
       <div className="w-full space-y-5">
-        <div className="text-[20px] w-fit font-medium -tracking-[0.02rem]">
+        <div className={`${isXS || isSM?"text-[15px]":isMD?"text-[18px]":"text-[20px]"} w-fit font-medium -tracking-[0.02rem]`}>
           Employees : Design Department
         </div>
 
-        <div className="flex flex-wrap gap-x-10 gap-y-5">
+        <div className={`flex flex-wrap  gap-x-10 gap-y-5`}>
           {employees.map((employee, index) => (
-            <div key={index} className="flex items-center flex-col">
+            <div key={index} className={`flex ${isXS || isSM || isMD?"w-[80px]":"w-[100px]"}  items-center flex-col`}>
               <div className="p-4 relative z-10 rounded-full w-fit bg-white border-2 border-gray-400">
                 <FaUser
                   size={

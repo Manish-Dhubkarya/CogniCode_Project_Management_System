@@ -1,45 +1,27 @@
 import { useEffect, useState } from "react";
 import MainSearchBar from "../UI_Components/SearchBars/MainSearchBar";
-import Navigation1 from "../UI_Components/Navigations/Navigation1";
 import Filter from "../UI_Components/Filter/Filter";
 import Button1 from "../UI_Components/Buttons/Button1";
 import PaginationNav from "../UI_Components/Navigations/PaginationNav";
 import MainNavigation from "../UI_Components/Navigations/MainNavigation";
 import { TbFilterBolt } from "react-icons/tb";
-import EmployeeProfile from "./EmployeeProfile";
-import UserProfile from "../assets/CredientialAssets/UserProfile.jpg";
+import CircularProgress from "../UI_Components/Progresses/CircularProgress";
 
-interface ProjectDetailsProps {
+interface ProjectListProps {
   Category: string;
-  Designation: string;
   Description: string;
+  EmployeeName:string;
+  ProjectId:string;
   SubmissionDate: string;
-  status: string;
-  statusRemark: string;
+  ComplitionPercentage:number;
+  Price:number;
 }
 
-interface EmployeeLandingProps {
-  ProjectDetails: ProjectDetailsProps[];
+interface HeadProjectListProps {
+  ProjectDetails: ProjectListProps[];
 }
 
-const EmployeeLanding: React.FC<EmployeeLandingProps> = ({ ProjectDetails }) => {
-  const tabs = ["Active", "Accepted", "Requested", "Performance"];
-  const employeeProfile = {
-    EmployeeName: "Himanshu Verma",
-    Profile: UserProfile,
-    Designation: "CEO",
-    TL: "NONE",
-    ProjectStartDate: "1 June",
-    ProjectEndDate: "1 Sep",
-    ProjectOnGoing: 10,
-    ProjectCompleted: 20,
-    Performance: [
-      { label: "Accuracy", value: "90%" },
-      { label: "On Time Execution", value: "70%" },
-      { label: "Skills", value: "80%" },
-      { label: "Efficiency", value: "75%" },
-    ],
-  };
+const HeadProjectList: React.FC<HeadProjectListProps> = ({ ProjectDetails }) => {
   const filters = [
     "Data Science Projects",
     "UI Design Projects",
@@ -54,34 +36,16 @@ const EmployeeLanding: React.FC<EmployeeLandingProps> = ({ ProjectDetails }) => 
   const [showFilter, setShowFilter] = useState(false);
   const [renderDrawer, setRenderDrawer] = useState(false);
   const [drawerVisible, setDrawerVisible] = useState(false);
-  const [activeTab, setActiveTab] = useState(tabs[0]);
   const itemsPerPage = 6;
 
-  // Sort ProjectDetails to move "Submitted" items to the end
-const sortedProjectDetails = [...ProjectDetails].sort((a, b) => {
-  // Helper function to get priority based on status and statusRemark
-  const getPriority = (item: ProjectDetailsProps) => {
-    const status = item.status.toLowerCase();
-    const remark = item.statusRemark.toLowerCase();
-
-    if (status === "accepted") {
-      return remark === "submitted" ? 2 :1 ;
-    } else if (status === "requested") {
-      return remark === "accepted" ? 1 : remark === "no response" ? 2 : 3;
-    }
-    return 4;
-  };
-
-  return getPriority(a) - getPriority(b);
-});
   // Filter ProjectDetails based on search query, activeTab, and selected filters
-  const filteredItems = sortedProjectDetails.filter(
+  const filteredItems = ProjectDetails.filter(
     (item) =>
-      item.status === activeTab &&
-      (item.Designation.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (item.ComplitionPercentage.toString().includes(searchQuery.toLowerCase()) ||
         item.Description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.SubmissionDate.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.statusRemark.toLowerCase().includes(searchQuery.toLowerCase())) &&
+        item.ProjectId.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.SubmissionDate.toString().includes(searchQuery.toLowerCase()) ||
+        item.Price.toString().includes(searchQuery.toLowerCase())) &&
       (selectedFilters.length === 0 || selectedFilters.includes(item.Category))
   );
 
@@ -89,9 +53,9 @@ const sortedProjectDetails = [...ProjectDetails].sort((a, b) => {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currentItems = filteredItems.slice(startIndex, endIndex);
-
+  // Get max text length from all items
   const maxTextLength = Math.max(
-    ...ProjectDetails.map((item) => (item.Designation).length)
+    ...ProjectDetails.map((item) => (item.EmployeeName + item.ProjectId).length)
   );
 
   // Decide width class based on max text length
@@ -100,12 +64,12 @@ const sortedProjectDetails = [...ProjectDetails].sort((a, b) => {
       ? "w-[300px]"
       : maxTextLength > 20
       ? "w-[250px]"
-      : "w-[180px]";
+      : "w-[200px]";
 
   // Reset to first page when search query, activeTab, or selectedFilters change
   useEffect(() => {
     setCurrentPage(1);
-  }, [searchQuery, activeTab, selectedFilters]);
+  }, [searchQuery, selectedFilters]);
 
   const [width, setWidth] = useState(window.innerWidth);
   useEffect(() => {
@@ -165,7 +129,7 @@ const sortedProjectDetails = [...ProjectDetails].sort((a, b) => {
         </div>
       </div>
       <div className={`flex w-full gap-x-5 items-start shrink-0 flex-row`}>
-        {(isXXS || isXS || isSM || isMD || activeTab === tabs[3]) ? (
+        {(isXXS || isXS || isSM || isMD) ? (
           renderDrawer && (
             <div
               className={`
@@ -193,32 +157,18 @@ const sortedProjectDetails = [...ProjectDetails].sort((a, b) => {
         <div
           className={`flex flex-col ${
             isXXS || isXS || isSM || isMD
-              ? "w-full"
-              : activeTab === tabs[3]
               ? "w-full flex"
               : "w-[75%]"
           }`}
         >
-          <div
-            className={`items-center flex ${
-              isXXS || isXS || isSM || isMD
-                ? "w-full"
-                : activeTab === tabs[3]
-                ? "w-full flex items-center"
-                : "justify-start w-fit px-5"
-            }`}
-          >
-            <Navigation1 tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} />
-          </div>
-          {activeTab !== tabs[3] ? (
-            // Table
+
             <div className="overflow-x-auto">
               {currentItems.length > 0 ? (
                 currentItems.map((item, index) => (
                   <div
                     key={index}
                     className={`flex justify-start items-start ${
-                      index === currentItems.length - 1 ? "mt-7" : "my-7"
+                      index === currentItems.length - 1 ? "mt-0" : "my-1"
                     } w-full min-w-[700px] flex-col`}
                   >
                     <div className="flex flex-col-reverse items-start justify-start w-full">
@@ -227,30 +177,37 @@ const sortedProjectDetails = [...ProjectDetails].sort((a, b) => {
                           width={widthClass}
                           gradientType="gradient1"
                           text={`${is2XL ? "text-[15px]" : "text-[12px]"}`}
-                          value={item.Designation}
+                          value={item.EmployeeName + "\u00A0\u00A0\u00A0" + item.ProjectId}
                         />
                       </div>
                       <div className="border-t-2 border-[#000000] w-full"></div>
                     </div>
                     <div className="flex mt-3 w-full pl-[2vw] justify-between items-center">
                       <div
-                        className={`text-[#000000] w-[35%] text-start flex font-normal ${
+                        className={`text-[#000000] w-[30%] text-start flex font-normal ${
                           is2XL ? "text-[15px]" : "text-[12px]"
                         } -tracking-[0.02rem]`}
                       >
                         {item.Description}
                       </div>
                       <div
-                        className={`text-[#000000] font-normal flex justify-center w-[35%] ${
+                        className={`text-[#000000] font-normal flex justify-center w-[30%] ${
                           is2XL ? "text-[15px]" : "text-[12px]"
                         } -tracking-[0.02rem]`}
                       >
                         Submission Date: {item.SubmissionDate}
                       </div>
-                      <div
-                        className={`${item.statusRemark.toLowerCase()==="accepted"?"text-[#0FB300]":(item.statusRemark.toLowerCase()==="declined" || item.statusRemark.toLowerCase()==="submission pending" )?"text-[#FF0000]":item.statusRemark.toLowerCase()==="submitted"?"text-[#474747]":"text-[#0000]"} w-[30%] font-normal text-[12px] -tracking-[0.02rem]`}
+                       <div
+                        className={`w-[20%] ${is2XL ? "text-[15px]" : "text-[12px]"} text-[#000000] flex flex-col items-center justify-center`}
                       >
-                        {item.statusRemark}
+                        <CircularProgress progress={item.ComplitionPercentage}/>
+                        <div>Completed</div>
+                      </div>
+                      <div
+                        className={`text-[#000000] w-[20%] space-y-1 font-normal text-[12px] -tracking-[0.02rem]`}
+                      >
+                       <div> ₹. {item.Price}/-</div>
+                        <div>Amount Left</div>
                       </div>
                     </div>
                   </div>
@@ -261,14 +218,8 @@ const sortedProjectDetails = [...ProjectDetails].sort((a, b) => {
                 </div>
               )}
             </div>
-          ) : (
-            <div className="py-10">
-              <EmployeeProfile {...employeeProfile} />
-            </div>
-          )}
         </div>
       </div>
-      {activeTab !== tabs[3] && (
         <div className="mt-8">
           <PaginationNav
             total={totalPages}
@@ -276,9 +227,8 @@ const sortedProjectDetails = [...ProjectDetails].sort((a, b) => {
             onPageChange={setCurrentPage}
           />
         </div>
-      )}
     </div>
   );
 };
 
-export default EmployeeLanding;
+export default HeadProjectList;

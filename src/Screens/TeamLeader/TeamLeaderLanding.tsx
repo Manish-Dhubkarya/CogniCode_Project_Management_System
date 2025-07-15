@@ -6,6 +6,7 @@ import Button1 from "../../UI_Components/Buttons/Button1";
 import PaginationNav from "../../UI_Components/Navigations/PaginationNav";
 import MainNavigation from "../../UI_Components/Navigations/MainNavigation";
 import { TbFilterBolt } from "react-icons/tb";
+import AllEmployeeList from "../AllEmployeeList";
 
 interface EmployeeCredientialsProps {
   Profile: string;
@@ -48,8 +49,15 @@ const TeamLeaderLanding: React.FC<TeamLeaderLandingProps> = ({ProjectDetails}) =
   const [activeTab, setActiveTab] = useState(tabs[0]); // Manage activeTab state
   const itemsPerPage = 6;
 
+  // Sort ProjectDetails to move "Submitted" items to the end
+  const sortedProjectDetails = [...ProjectDetails].sort((a, b) => {
+    if (a.statusRemark?.toLowerCase() === "submitted" && b.statusRemark?.toLowerCase() !== "submitted") return 1;
+    if (a.statusRemark?.toLowerCase() !== "submitted" && b.statusRemark?.toLowerCase() === "submitted") return -1;
+    return 0;
+  });
+
   // Filter ProjectDetails based on search query and activeTab
-  const filteredItems = ProjectDetails.filter(
+  const filteredItems = sortedProjectDetails.filter(
     (item) =>
       item.status === activeTab && // Filter by active tab
       (item.Designation.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -63,6 +71,18 @@ const TeamLeaderLanding: React.FC<TeamLeaderLandingProps> = ({ProjectDetails}) =
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currentItems = filteredItems.slice(startIndex, endIndex);
+  // Get max text length from all items
+  const maxTextLength = Math.max(
+    ...ProjectDetails.map((item) => (item.SubmissionDate).length)
+  );
+
+  // Decide width class based on max text length
+  const widthClass =
+    maxTextLength > 30
+      ? "w-[300px]"
+      : maxTextLength > 20
+      ? "w-[250px]"
+      : "w-[200px]";
 
   // Reset to first page when search query or activeTab changes
   useEffect(() => {
@@ -177,7 +197,7 @@ const TeamLeaderLanding: React.FC<TeamLeaderLandingProps> = ({ProjectDetails}) =
                   <div className="flex flex-col-reverse items-start justify-start w-full">
                     <div>
                       <Button1
-                        width="w-[180px]"
+                        width={widthClass}
                         gradientType="gradient1"
                         text={`${is2XL ? "text-[15px]" : "text-[12px]"}`}
                         value={item.Designation}
@@ -223,7 +243,7 @@ const TeamLeaderLanding: React.FC<TeamLeaderLandingProps> = ({ProjectDetails}) =
                       </div>
                     ) : item.status === "Completed" ? (
                       <div
-                        className={`text-[#000000] w-[30%] font-normal text-[12px] -tracking-[0.02rem]`}
+                        className={`${item.statusRemark?.toLowerCase()==="submitted"?"text-[#474747]":"text-[#FF0000]"}  w-[30%] font-normal text-[12px] -tracking-[0.02rem]`}
                       >
                         {item.statusRemark}
                       </div>
@@ -271,7 +291,7 @@ const TeamLeaderLanding: React.FC<TeamLeaderLandingProps> = ({ProjectDetails}) =
             )}
           </div>:
           <div>
-            Head all employee list
+            <AllEmployeeList/>
             </div>}
         </div>
       </div>
