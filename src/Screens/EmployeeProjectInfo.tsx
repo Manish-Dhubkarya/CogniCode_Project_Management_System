@@ -29,7 +29,6 @@ const EmployeeProjectInfo:React.FC<EmployeeProjectInfoProps> = (props) => {
   const isXXS = width <= 480;
   const isXS = width > 480 && width <= 640;
   const isSM = width > 640 && width <= 768;
-  const isMD = width > 768 && width <= 1024;
   const isLG = width > 1024 && width <= 1280;
   const isXL = width > 1280 && width <= 1536;
   const is2XL = width > 1536;

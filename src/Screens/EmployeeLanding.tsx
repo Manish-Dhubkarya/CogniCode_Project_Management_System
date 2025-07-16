@@ -22,7 +22,9 @@ interface EmployeeLandingProps {
   ProjectDetails: ProjectDetailsProps[];
 }
 
-const EmployeeLanding: React.FC<EmployeeLandingProps> = ({ ProjectDetails }) => {
+const EmployeeLanding: React.FC<EmployeeLandingProps> = ({
+  ProjectDetails,
+}) => {
   const tabs = ["Active", "Accepted", "Requested", "Performance"];
   const employeeProfile = {
     EmployeeName: "Himanshu Verma",
@@ -58,22 +60,22 @@ const EmployeeLanding: React.FC<EmployeeLandingProps> = ({ ProjectDetails }) => 
   const itemsPerPage = 6;
 
   // Sort ProjectDetails to move "Submitted" items to the end
-const sortedProjectDetails = [...ProjectDetails].sort((a, b) => {
-  // Helper function to get priority based on status and statusRemark
-  const getPriority = (item: ProjectDetailsProps) => {
-    const status = item.status.toLowerCase();
-    const remark = item.statusRemark.toLowerCase();
+  const sortedProjectDetails = [...ProjectDetails].sort((a, b) => {
+    // Helper function to get priority based on status and statusRemark
+    const getPriority = (item: ProjectDetailsProps) => {
+      const status = item.status.toLowerCase();
+      const remark = item.statusRemark.toLowerCase();
 
-    if (status === "accepted") {
-      return remark === "submitted" ? 2 :1 ;
-    } else if (status === "requested") {
-      return remark === "accepted" ? 1 : remark === "no response" ? 2 : 3;
-    }
-    return 4;
-  };
+      if (status === "accepted") {
+        return remark === "submitted" ? 2 : 1;
+      } else if (status === "requested") {
+        return remark === "accepted" ? 1 : remark === "no response" ? 2 : 3;
+      }
+      return 4;
+    };
 
-  return getPriority(a) - getPriority(b);
-});
+    return getPriority(a) - getPriority(b);
+  });
   // Filter ProjectDetails based on search query, activeTab, and selected filters
   const filteredItems = sortedProjectDetails.filter(
     (item) =>
@@ -91,7 +93,7 @@ const sortedProjectDetails = [...ProjectDetails].sort((a, b) => {
   const currentItems = filteredItems.slice(startIndex, endIndex);
 
   const maxTextLength = Math.max(
-    ...ProjectDetails.map((item) => (item.Designation).length)
+    ...ProjectDetails.map((item) => item.Designation.length)
   );
 
   // Decide width class based on max text length
@@ -161,11 +163,14 @@ const sortedProjectDetails = [...ProjectDetails].sort((a, b) => {
           </div>
         )}
         <div className={`${isXXS || isXS || isSM || isMD ? "w-fit" : "w-fit"}`}>
-          <MainSearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+          <MainSearchBar
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+          />
         </div>
       </div>
       <div className={`flex w-full gap-x-5 items-start shrink-0 flex-row`}>
-        {(isXXS || isXS || isSM || isMD || activeTab === tabs[3]) ? (
+        {isXXS || isXS || isSM || isMD || activeTab === tabs[3] ? (
           renderDrawer && (
             <div
               className={`
@@ -208,7 +213,11 @@ const sortedProjectDetails = [...ProjectDetails].sort((a, b) => {
                 : "justify-start w-fit px-5"
             }`}
           >
-            <Navigation1 tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} />
+            <Navigation1
+              tabs={tabs}
+              activeTab={activeTab}
+              setActiveTab={setActiveTab}
+            />
           </div>
           {activeTab !== tabs[3] ? (
             // Table
@@ -225,7 +234,13 @@ const sortedProjectDetails = [...ProjectDetails].sort((a, b) => {
                       <div>
                         <Button1
                           width={widthClass}
-                          gradientType="gradient1"
+                          gradientType={`${
+                            ["submitted", "declined"].includes(
+                              item.statusRemark?.toLowerCase().trim()
+                            )
+                              ? ""
+                              : "gradient1"
+                          }`}
                           text={`${is2XL ? "text-[15px]" : "text-[12px]"}`}
                           value={item.Designation}
                         />
@@ -248,7 +263,17 @@ const sortedProjectDetails = [...ProjectDetails].sort((a, b) => {
                         Submission Date: {item.SubmissionDate}
                       </div>
                       <div
-                        className={`${item.statusRemark.toLowerCase()==="accepted"?"text-[#0FB300]":(item.statusRemark.toLowerCase()==="declined" || item.statusRemark.toLowerCase()==="submission pending" )?"text-[#FF0000]":item.statusRemark.toLowerCase()==="submitted"?"text-[#474747]":"text-[#0000]"} w-[30%] font-normal text-[12px] -tracking-[0.02rem]`}
+                        className={`${
+                          item.statusRemark.toLowerCase() === "accepted"
+                            ? "text-[#0FB300]"
+                            : item.statusRemark.toLowerCase() === "declined" ||
+                              item.statusRemark.toLowerCase() ===
+                                "submission pending"
+                            ? "text-[#FF0000]"
+                            : item.statusRemark.toLowerCase() === "submitted"
+                            ? "text-[#474747]"
+                            : "text-[#000]"
+                        } w-[30%] font-normal text-[12px] -tracking-[0.02rem]`}
                       >
                         {item.statusRemark}
                       </div>

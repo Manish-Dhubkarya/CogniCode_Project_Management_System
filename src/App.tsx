@@ -10,6 +10,8 @@ import EmployeeProjectInfo from "./Screens/EmployeeProjectInfo";
 import TeamLeaderLanding from "./Screens/TeamLeader/TeamLeaderLanding";
 import AllEmployeeList from "./Screens/AllEmployeeList";
 import HeadProjectList from "./Screens/HeadProjectList";
+import TeamLeaderProjectAss from "./Screens/TeamLeader/TeamLeaderProjectAss";
+import HeadClientProjectInfo from "./Screens/HeadClientProjectInfo";
 
 function App() {
   interface PerformanceProps {
@@ -348,6 +350,22 @@ function App() {
         SubmissionDate: "30 Nov 24",
         status: "Requested",
         statusRemark:"DECLINED"
+      },
+      {
+        Category:"Immediate Deadline Projects",
+        Designation: "UI/UX Designer",
+        Description: "Redesigned dashboard interface for logistics software.",
+        SubmissionDate: "30 Nov 24",
+        status: "Accepted",
+        statusRemark:"SUBMISSION PENDING"
+      },
+      {
+        Category:"Immediate Deadline Projects",
+        Designation: "UI/UX Designer",
+        Description: "Redesigned dashboard interface for logistics software.",
+        SubmissionDate: "30 Nov 24",
+        status: "Requested",
+        statusRemark:"NO RESPONSE"
       },
     ],
   };
@@ -873,6 +891,14 @@ ProjectDetails: [
           <Route
             path="/headprojectlist"
             element={<HeadProjectList {...headProjectList} />}
+          />
+           <Route
+            path="/teamleaderprojectass"
+            element={<TeamLeaderProjectAss {...employeeProjectInfo} />}
+          />
+            <Route
+            path="/headclientprojectinfo"
+            element={<HeadClientProjectInfo {...clientProject} />}
           />
         </Routes>
       </Router>

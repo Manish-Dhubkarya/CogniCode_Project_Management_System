@@ -7,10 +7,12 @@ const EmployeeSearchBar: React.FC = () => {
       <div
         className="
           relative 
-          w-[90%] 
+          w-[100%] 
           h-[34px] 
           bg-white 
-          rounded-full
+          border-[1.5px]
+          border-blue-400
+          rounded-[5px]
           py-1 
           pl-6
           pr-4 
