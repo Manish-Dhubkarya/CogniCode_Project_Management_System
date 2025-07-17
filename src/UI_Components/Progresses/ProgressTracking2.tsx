@@ -1,8 +1,8 @@
-// components/HorizontalStepper.tsx
+// components/VerticalStepper.tsx
 import React from "react";
 
 interface ProgressTrackingProps {
-  width?: number;
+  height?: number;
 }
 
 const steps = [
@@ -17,17 +17,32 @@ const steps = [
   { status: "inactive" },
 ];
 
-const ProgressTracking2: React.FC<ProgressTrackingProps> = ({ width }) => {
+const ProgressTracking2: React.FC<ProgressTrackingProps> = ({ height }) => {
+  // Calculate the height for each connector
+  const stepCount = steps.length;
+  const circleHeight = 34; // Height of each step circle (34px)
+  const connectorCount = stepCount - 1;
+  const connectorHeight = height
+    ? (height - stepCount * circleHeight) / connectorCount // Distribute remaining height
+    : 55; // Default connector height if no height prop
+
   return (
     <div
-      className="flex items-center justify-start"
-      style={{ width: width ? `${width}px` : "auto" }}
+      className="flex flex-col items-center"
+      style={{ height: height ? `${height}px` : "auto" }} // Set container height
     >
       {steps.map((step, index) => (
-        <div key={index} className="flex items-center">
+        <div key={index} className="flex flex-col items-center">
+          {/* Line before the circle */}
+          {index !== 0 && (
+            <div
+              className="w-px bg-blue-500"
+              style={{ height: `${connectorHeight}px` }} // Use inline style for dynamic height
+            ></div>
+          )}
           {/* Circle */}
           <div
-            className={`rounded-full border rotate-90 ${
+            className={`rounded-full rotate-90 border ${
               step.status === "completed"
                 ? "border-[#1B7BFF]"
                 : step.status === "active"
@@ -53,11 +68,6 @@ const ProgressTracking2: React.FC<ProgressTrackingProps> = ({ width }) => {
               </div>
             )}
           </div>
-
-          {/* Line after the circle */}
-          {index !== steps.length - 1 && (
-            <div className="h-px bg-blue-500" style={{ width: "40px" }}></div>
-          )}
         </div>
       ))}
     </div>

@@ -5,6 +5,7 @@ interface ProfileWithDesignationProps{
   Designation:string;
   EmployeeName:string;
   IsSmall:boolean;
+  borderColor?:string;
 
 }
 const ProfileWithDesignation:React.FC<ProfileWithDesignationProps> = (props) => {
@@ -27,7 +28,7 @@ const ProfileWithDesignation:React.FC<ProfileWithDesignationProps> = (props) => 
   return (
     <div className="flex  items-start ">
         <div className="flex  flex-col items-center justify-center">
-        <div className={`p-4 relative z-1 rounded-full  w-fit  bg-white border-gray-400 border-3`}>
+        <div className={`p-4 relative z-1 rounded-full  w-fit  bg-white ${props.borderColor? props.borderColor:"border-gray-400"}  border-3`}>
           {props.IsSmall?
           <FaUser size={isXS?25:isSM?30:isMD?35: isLG?40:isXL?45:is2XL?40:15} color="#9e9e9e" />:
           <FaUser size={isXS?40:isSM?45:isMD?50: isLG?55:isXL?60:is2XL?65:30} color="#9e9e9e" />

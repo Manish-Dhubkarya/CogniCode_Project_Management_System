@@ -182,7 +182,7 @@ const HeadProjectList: React.FC<HeadProjectListProps> = ({ ProjectDetails }) => 
                       </div>
                       <div className="border-t-2 border-[#000000] w-full"></div>
                     </div>
-                    <div className="flex mt-3 w-full pl-[2vw] justify-between items-center">
+                    <div className="flex  w-full pl-[2vw] justify-between items-center">
                       <div
                         className={`text-[#000000] w-[30%] text-start flex font-normal ${
                           is2XL ? "text-[15px]" : "text-[12px]"

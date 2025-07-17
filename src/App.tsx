@@ -854,6 +854,42 @@ ProjectDetails: [
   }
 ]
   }
+  const headClientProjectInfo = {
+     HeadName:"Avinash",
+  HeadDesignation:"Data Scientist",
+    EmployeeDesignation: "Full Stack Developer",
+    EmployeeName: "Manish Dhubkarya",
+    ProjectID: "GHJK985GGJ99",
+    SubmissionData:"20 Aug 2025",
+  AmountLeft:2000,
+    ProjectTitle: "Paint & Escape UI Design Project",
+    AboutCompany:
+      "My name’s Craig, a retired Art Teacher from California and the current Founder of Paint & Escape. Paint & Escape vacations allow creative individuals, whether beginners or experts, hobbyists or professionals, to explore and share art with the world. I’ve been running this business for just over 18 months: going on over 50 art vacations, with just under 300 fantastically unique individuals. My mission is to awaken a new source of inspiration on a trip dedicated entirely to painting.",
+    WhatDoYouNeed:
+      "I’d like to make the UI on my website easier to use and work with. As I want to eventually increase the amount of travels Paint & Escape provides, and number of guests, I’ll need a smooth, operable UI to do this. The current UI is blocky, and doesn’t best suit the minimalist, flowing vision that the Paint & Escape brand encompasses.",
+    ChatMessages: [
+      {
+        message:
+          "Hi, Sasha your paper has been finished with writing will be going for plag report today.",
+      },
+      { message: "Ok Sir please tell me about any remaining payments" },
+      { message: "Sure, It will be updated in your profile." },
+    ],
+    Employees:[
+      {employeeName:"Manish Dhubkarya"},
+      {employeeName:"Manish Dhubkarya"},
+      {employeeName:"Manish Dhubkarya"},
+      {employeeName:"Manish Dhubkarya"},
+      {employeeName:"Manish Dhubkarya"},
+      {employeeName:"Manish Dhubkarya"},
+      {employeeName:"Manish Dhubkarya"},
+      {employeeName:"Manish Dhubkarya"},
+      {employeeName:"Manish Dhubkarya"},
+      {employeeName:"Manish Dhubkarya"},
+      {employeeName:"Manish Dhubkarya"},
+      {employeeName:"Manish Dhubkarya"},
+    ]
+  };
 
   return (
     <div className="font-librefranklin">
@@ -898,7 +934,7 @@ ProjectDetails: [
           />
             <Route
             path="/headclientprojectinfo"
-            element={<HeadClientProjectInfo {...clientProject} />}
+            element={<HeadClientProjectInfo {...headClientProjectInfo} />}
           />
         </Routes>
       </Router>

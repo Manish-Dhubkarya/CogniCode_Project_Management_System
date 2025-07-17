@@ -103,8 +103,8 @@ const AllEmployeeList = () => {
                 />
               </div>
               <div className="text-center">
-                <div>{employee.name}</div>
-                <div className="font-medium">Profile</div>
+                <div className="text-[12px]">{employee.name}</div>
+                <div className="font-medium text-[12px]">Profile</div>
               </div>
             </div>
           ))}
