@@ -20,7 +20,7 @@ interface Props {
   title:string;
 }
 
-const RegistrationModal: React.FC<Props> = ({ isOpen, onClose, onSubmit, title }) => {
+const Login: React.FC<Props> = ({ isOpen, onClose, onSubmit, title }) => {
   const [showPassword, setShowPassword] = useState(false);
 const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -87,7 +87,7 @@ const handlePhotoRemove = () => {
       />
 
       {/* Modal Content */}
-      <div className="relative z-50 w-full max-w-xl p-6 rounded-3xl border border-white/50 bg-[#FFBF00]/20 backdrop-blur-3xl shadow-2xl">
+      <div className="relative z-50 w-full max-w-md p-6 rounded-3xl border border-white/50 bg-[#FFBF00]/20 backdrop-blur-3xl shadow-2xl">
         {/* Header */}
         <div className="flex justify-between items-center border-b border-gray-200 pb-3 mb-5">
           <FaUserShield color="#05c107" size={25} />
@@ -107,14 +107,11 @@ const handlePhotoRemove = () => {
 
         {/* Form */}
         <div className="space-y-5 text-gray-800">
-<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div className="grid grid-cols-1 gap-4">
  {[
   { label: "Name*", placeholder: "Full name", key: "name" },
-  { label: "Designation*", placeholder: "Designation", key: "designation" },
   { label: "Employee ID*", placeholder: "Employee ID", key: "employeeId" },
-  { label: "Company's mail*", placeholder: "Company's mail", key: "companymail" },
   { label: "Password*", placeholder: "Password", key: "password" },
-  { label: "Confirm Password*", placeholder: "Confirm Password", key: "conpassword" },
 ].map(({ label, placeholder, key }) => (
   <div key={key}>
     <label className="text-sm text-start font-semibold text-gray-700 block mb-1">
@@ -163,87 +160,18 @@ const handlePhotoRemove = () => {
 </div>
 
 
-          {/* Gender */}
-           <div className="w-full justify-between gap-x-4  flex">
-            <div className="w-[50%]">
-    <label className="text-sm text-start font-semibold text-gray-700 block mb-1">
-      Gender*
-    </label>
-    <div className="w-full p-[2px] rounded-[5px] bg-blue-300 focus-within:bg-gradient-to-r focus-within:from-[#DFFF00] focus-within:to-[#6495ED] transition">
-      <select
-        value={formData.gender}
-        onChange={e => handleChange("gender", e.target.value)}
-        className="w-full px-4 py-1.5 text-[14px] rounded-[4px] bg-white text-gray-800 placeholder-gray-400 focus:ring-0 outline-none transition"
-      >
-        <option value="male">Male</option>
-        <option value="female">Female</option>
-        <option value="other">Other</option>
-      </select>
-    </div>
-</div>
-    {/* Upload Photo */}
-{/* Photo Upload */}
-<div className="w-[50%] flex flex-col items-start">
-  <label className="text-sm text-start font-semibold text-gray-700 block mb-1">
-    Upload Photo*
-  </label>
-  <div className="w-28 h-28 relative">
-    <input
-      id="photoInput"
-      type="file"
-      accept="image/*"
-      onChange={handlePhotoChange}
-      className="hidden"
-    />
-
-    <label
-      htmlFor="photoInput"
-      onDrop={handleDrop}
-      onDragOver={handleDragOver}
-      onDragLeave={handleDragLeave}
-      className={`block w-full h-full bg-white rounded-[10px] overflow-hidden border-2 cursor-pointer relative transition
-        ${isDragging ? "border-dashed border-green-500 bg-green-50" : "border-blue-400"}
-      `}
-    >
-      {photoPreview ? (
-        <img
-          src={photoPreview}
-          alt="Preview"
-          className="w-full h-full object-cover"
-        />
-      ) : (
-        <div className="w-full text-[12px] flex-col h-full flex items-center justify-center text-gray-600">
-          <MdOutlineCloudUpload size={25} />
-          <div>Drag or Upload</div>
-        </div>
-      )}
-    </label>
-
-    {photoPreview && (
-      <div
-        onClick={handlePhotoRemove}
-        className="absolute top-[-6px] right-[-6px] bg-white rounded-full p-[2px] text-black cursor-pointer shadow-md"
-      >
-        <AiOutlineCloseCircle size={18} />
-      </div>
-    )}
-  </div>
-</div>
-
-
-
-  </div>
-
           {/* Submit */}
-          <div
+        <div
   onClick={handleSubmit}
   className="px-6 py-3 cursor-pointer rounded-xl text-white font-semibold shadow-[0_2px_2px_rgba(0,0,0,0.4)] border-none relative overflow-hidden"
   style={{
     backgroundImage: "linear-gradient(135deg, #6495ED, #40E0D0)",
   }}
 >
-  Register
+  Login
 </div>
+
+
 
         </div>
       </div>
@@ -251,4 +179,4 @@ const handlePhotoRemove = () => {
   );
 };
 
-export default RegistrationModal;
+export default Login;

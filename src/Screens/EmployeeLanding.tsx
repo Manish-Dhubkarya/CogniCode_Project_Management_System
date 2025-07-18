@@ -27,10 +27,10 @@ const EmployeeLanding: React.FC<EmployeeLandingProps> = ({
 }) => {
   const tabs = ["Active", "Accepted", "Requested", "Performance"];
   const employeeProfile = {
-    EmployeeName: "Himanshu Verma",
-    Profile: UserProfile,
-    Designation: "CEO",
-    TL: "NONE",
+    EmployeeName: "Josh Philips",
+    Profile: "https://randomuser.me/api/portraits/men/75.jpg",
+    Designation: "UI Designer",
+    TL: "Dheer Verma",
     ProjectStartDate: "1 June",
     ProjectEndDate: "1 Sep",
     ProjectOnGoing: 10,
